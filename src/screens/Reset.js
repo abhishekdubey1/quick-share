@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import M from "materialize-css";
 const Reset = () => {
   const history = useHistory();
   const [email, setEmail] = useState("");
