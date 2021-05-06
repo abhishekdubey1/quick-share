@@ -7,8 +7,6 @@ import Signup from "../screens/Signup";
 import CreatePost from "../screens/CreatePost";
 import UserProfile from "../components/UserProfile";
 import FollowingsPost from "../screens/FollowingsPost";
-import Reset from "../screens/Reset";
-import NewPassword from "../components/Newpassword";
 import { UserContext } from "../context/UserContext";
 import SinglePost from "../components/SinglePost";
 
@@ -48,7 +46,7 @@ export const Routing = () => {
         <UserProfile />
       </Route>
       <Route path="/post/:postIdParam">
-        <SinglePost userId={_id} />
+        <SinglePost userId={_id || ""} />
       </Route>
       <Route path="/myfollowingpost">
         <FollowingsPost />

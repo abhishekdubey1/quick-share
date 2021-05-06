@@ -10,6 +10,7 @@ import {
   makeComment,
   unlikePost,
 } from "../utils/apiCalls";
+import { Link } from "react-router-dom";
 const Home = () => {
   const [data, setData] = useState([]);
   let { state } = useContext(UserContext);
@@ -25,7 +26,13 @@ const Home = () => {
     makeComment: (text, postId) => makeComment(text, postId, setData),
     deletePost: (postId) => deletePost(postId, setData),
   };
-  return <Feed data={data} postActions={postActions} userId={state._id} />;
+  return state ? (
+    <Feed data={data} postActions={postActions} userId={state._id} />
+  ) : (
+    <Link to={"/signin"}>
+      <h3 className="">Please Login</h3>
+    </Link>
+  );
 };
 
 export default Home;
