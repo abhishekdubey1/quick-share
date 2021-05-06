@@ -29,9 +29,11 @@ const CreatePost = () => {
         data.append("file", image);
         data.append("upload_preset", "hook-up");
         data.append("cloud_name", "hookupcloudddddddddddd");
-        let resData = await uploadToCloud;
+        let resData = await uploadToCloud(data);
         if (resData) {
           handleCreatePost(resData.url);
+        } else {
+          setAppState({ status: "idle" });
         }
       }
     } catch (error) {
