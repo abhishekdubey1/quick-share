@@ -10,7 +10,7 @@ const Reset = () => {
         email
       )
     ) {
-      M.toast({ html: "invalid email", classes: "#c62828 red darken-3" });
+      // M.toast({ html: "invalid email", classes: "#c62828 red darken-3" });
       return;
     }
     fetch("/reset-password", {
@@ -25,9 +25,9 @@ const Reset = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.error) {
-          M.toast({ html: data.error, classes: "#c62828 red darken-3" });
+          // M.toast({ html: data.error, classes: "#c62828 red darken-3" });
         } else {
-          M.toast({ html: data.message, classes: "#43a047 green darken-1" });
+          // M.toast({ html: data.message, classes: "#43a047 green darken-1" });
           history.push("/signin");
         }
       })
