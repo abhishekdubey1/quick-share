@@ -29,7 +29,6 @@ const Home = () => {
   return (
     <>
       <Feed data={data} postActions={postActions} userId={state?._id} />
-
       {!state && (
         <Link to={"/signin"}>
           <h3 className="">Please Login</h3>
