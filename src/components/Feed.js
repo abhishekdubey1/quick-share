@@ -6,8 +6,8 @@ import { useMount } from "../utils/customHooks";
 import Post from "./Post";
 
 function Feed({ data, postActions, userId }) {
-  const { state } = useContext(UserContext);
-  const { _id } = state || JSON.parse(localStorage.getItem("user"));
+  let { state } = useContext(UserContext);
+  state = state || JSON.parse(localStorage.getItem("user"));
   const [appState, setAppState] = useState(initialState);
   const { status } = appState;
   const isMounted = useMount();
@@ -33,7 +33,7 @@ function Feed({ data, postActions, userId }) {
               dpUrl={item.dpUrl}
               caption={item.caption}
               postActions={postActions}
-              isLiked={item.likes.includes(_id)}
+              isLiked={item.likes.includes(state?._id)}
             />
           );
         })}

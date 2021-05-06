@@ -10,14 +10,17 @@ import {
   makeComment,
   unlikePost,
 } from "../utils/apiCalls";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 const Home = () => {
+  const history = useHistory();
   const [data, setData] = useState([]);
   let { state } = useContext(UserContext);
   state = state || JSON.parse(localStorage.getItem("user"));
   useEffect(() => {
-    // fetchPosts();
-  }, []);
+    if (!state) {
+      history.push("/signin");
+    }
+  }, [history, state]);
   useTitle("Home - Instagram");
   const postActions = {
     fetchPosts: () => fetchPosts(setData),
