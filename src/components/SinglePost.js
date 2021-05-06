@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
-import { likePost, makeComment } from "../utils/apiCalls";
+import { likePost } from "../utils/apiCalls";
 import { apiEndPoint } from "../utils/helper";
 import CommentBox from "./CommentBox";
-import { CommentBtn, DeleteBtn, LikeBtn, UnLikeBtn } from "./Svg";
+import { DeleteBtn, LikeBtn, UnLikeBtn } from "./Svg";
 
 function SinglePost(props) {
   const { postIdParam } = useParams();

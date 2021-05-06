@@ -25,9 +25,11 @@ const Profile = () => {
     if (userid) {
       if (isFollowed) {
         const data = await unFollow(userid);
+        console.log(data);
         console.log({ ...user, followers });
       } else {
         const data = await follow(userid);
+        console.log(data);
         console.log({ ...user, followers });
         // setUser((u) => ({ ...u, ...data }));
       }
@@ -46,9 +48,11 @@ const Profile = () => {
           <div className="profile-main">
             <h2 className="profile-username">{email}</h2>
             <div className="profile-follow-btn">
-              <button className="" onClick={handleFollow}>
-                {!isFollowed ? "Follow" : "UnFollow"}
-              </button>
+              {false && (
+                <button className="" onClick={handleFollow}>
+                  {!isFollowed ? "Follow" : "UnFollow"}
+                </button>
+              )}{" "}
             </div>
           </div>
           <ul className="profile-stats">

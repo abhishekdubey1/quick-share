@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-
 /*vARIABLES */
 export const ROUTES = {
   HOME: "/",

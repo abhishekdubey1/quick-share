@@ -2,14 +2,16 @@ import { useEffect, useState, useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import { useTitle } from "../utils/customHooks";
 import { capitalize } from "../utils/helper";
+
 const Profile = () => {
   const [mypics, setPics] = useState([]);
+  console.log(mypics);
   const { state, dispatch } = useContext(UserContext);
   let { dpUrl, name, email, followers, following, postsCount } = state
     ? state
     : JSON.parse(localStorage.getItem("user"));
   const [image, setImage] = useState("");
-  function updateProfile(params) {
+  function updateProfile() {
     fetch("/mypost", {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
@@ -62,9 +64,14 @@ const Profile = () => {
   const updatePhoto = (file) => {
     setImage(file);
   };
+  const deleteLater = () => {
+    updatePhoto();
+    updateProfile();
+  };
   useTitle(`${capitalize(name)} - Instagram`);
   return (
     <div className="profile">
+      {false && <button onClick={() => false && deleteLater()}>caution</button>}
       <header className="profile-info">
         <div className="profile-picture">
           <img src={dpUrl} alt={`Display of ${name}`} />

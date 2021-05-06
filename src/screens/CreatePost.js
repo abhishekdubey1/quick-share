@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { apiEndPoint, initialState } from "../utils/helper";
+import { initialState } from "../utils/helper";
 import { useImage, useTitle } from "../utils/customHooks";
 import { Input } from "../components/Element-Component";
 import { uploadToCloud, createPost } from "../utils/apiCalls";
@@ -10,7 +10,7 @@ const CreatePost = () => {
   const { clearImage, ipRef, onSelectFile, image, preview } = useImage();
   const [caption, setCaption] = useState("");
   const [appState, setAppState] = useState(initialState);
-  const { status, data, error } = appState;
+  const { status } = appState;
 
   const handleCreatePost = async (postUrl) => {
     if (postUrl && caption) {

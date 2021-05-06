@@ -11,7 +11,7 @@ const CommentBox = ({ postId, comments, userId, isOwnPost }) => {
 
   const showViewBtn = commentList.length > 3 && count <= commentList.length;
   const [appState, setAppState] = useState(initialState);
-  const { status, data, error } = appState;
+  const { status } = appState;
   const showHideBtn = count > 4;
   const cmtInput = useRef(null);
   const isOwnComment = (postedById) =>

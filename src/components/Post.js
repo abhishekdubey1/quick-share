@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { likePost, unlikePost } from "../utils/apiCalls";
-import { apiEndPoint } from "../utils/helper";
 import { CommentBtn, DeleteBtn, LikeBtn, UnLikeBtn } from "./Svg";
 function Post({
   postActions,

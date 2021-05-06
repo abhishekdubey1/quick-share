@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef } from "react";
+import { useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import { useOnlineStatus } from "../utils/customHooks";
