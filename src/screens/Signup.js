@@ -72,7 +72,6 @@ const SignUp = () => {
     <div className="signup-container">
       <Alreadyaccount />
       <div className="Signup">
-        <button onClick={uploadPic}>Fake</button>
         <div className="name">
           <label htmlFor="signupName">Name</label>
           <input
