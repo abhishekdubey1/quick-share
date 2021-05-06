@@ -31,19 +31,19 @@ const SignUp = () => {
   useTitle("Sign Up - Instagram");
 
   async function submitForm(dpUrl = defaultSrc) {
-    try {
-      console.log("signing up");
-      const { data } = await axios.post(`${apiEndPoint}/signup`, {
-        name: values.name.toString().trim() || "Chan",
-        password: values.password.toString().trim() || "chan1234", //values.password,
-        email: values.email.toString().trim() || "chan@gmail.com", //values.email,
-        dpUrl,
-      });
-      console.log("be response: ", { data });
-      alert(data.message);
-      history.push("/signin");
-    } catch (error) {
-      alert(error.message);
+    if (values.signupName && values.signupPassword && values.signupEmail) {
+      try {
+        const { data } = await axios.post(`${apiEndPoint}/signup`, {
+          name: values.signupName.toString().trim() || "Chan",
+          password: values.signupPassword || "chan1234", //values.password,
+          email: values.signupEmail.toString().trim() || "chan@gmail.com", //values.email,
+          dpUrl,
+        });
+        alert(data.message);
+        history.push("/signin");
+      } catch (error) {
+        alert(error.message);
+      }
     }
   }
   async function uploadPic(params) {

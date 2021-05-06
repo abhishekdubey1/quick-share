@@ -26,12 +26,16 @@ const Home = () => {
     makeComment: (text, postId) => makeComment(text, postId, setData),
     deletePost: (postId) => deletePost(postId, setData),
   };
-  return state ? (
-    <Feed data={data} postActions={postActions} userId={state._id} />
-  ) : (
-    <Link to={"/signin"}>
-      <h3 className="">Please Login</h3>
-    </Link>
+  return (
+    <>
+      <Feed data={data} postActions={postActions} userId={state?._id} />
+
+      {!state && (
+        <Link to={"/signin"}>
+          <h3 className="">Please Login</h3>
+        </Link>
+      )}
+    </>
   );
 };
 
