@@ -1,0 +1,72 @@
+.b {
+  font-weight: 500;
+}
+.dn {
+  display: none;
+}
+.fl-ct {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ps-rl {
+  position: relative;
+}
+.fs-sm {
+  font-size: 13px;
+}
+.fs-lg {
+  font-size: 20px;
+}
+.loading:after {
+  content: " .";
+  animation: dots 1s steps(5, end) infinite;
+}
+@keyframes dots {
+  0%,
+  20% {
+    color: black;
+    text-shadow: 0.25em 0 0 rgba(0, 0, 0, 0), 0.5em 0 0 rgba(0, 0, 0, 0);
+  }
+  40% {
+    color: black;
+    text-shadow: 0.25em 0 0 rgba(0, 0, 0, 0), 0.5em 0 0 rgba(0, 0, 0, 0);
+  }
+  60% {
+    text-shadow: 0.25em 0 0 black, 0.5em 0 0 rgba(0, 0, 0, 0);
+  }
+  80%,
+  100% {
+    text-shadow: 0.25em 0 0 black, 0.5em 0 0 black;
+  }
+}
+.cmt-load {
+  font-size: 35px;
+  margin: -15px 0px 15px 10px;
+}
+.lg {
+  background: limegreen;
+  color: limegreen;
+}
+.gy {
+  background: gray;
+  color: gray;
+}
+/* @keyframes dots {
+  0%,
+  20% {
+    color: rgba(0, 0, 0, 0);
+    text-shadow: 0.25em 0 0 rgba(0, 0, 0, 0), 0.5em 0 0 rgba(0, 0, 0, 0);
+  }
+  40% {
+    color: white;
+    text-shadow: 0.25em 0 0 rgba(0, 0, 0, 0), 0.5em 0 0 rgba(0, 0, 0, 0);
+  }
+  60% {
+    text-shadow: 0.25em 0 0 white, 0.5em 0 0 rgba(0, 0, 0, 0);
+  }
+  80%,
+  100% {
+    text-shadow: 0.25em 0 0 white, 0.5em 0 0 white;
+  }
+} */

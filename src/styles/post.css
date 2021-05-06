@@ -1,0 +1,169 @@
+.App {
+  font-family: sans-serif;
+  font-family: "Kiwi Maru", serif;
+}
+body {
+  background-color: #efefef;
+}
+.post {
+  height: max-content;
+  max-height: max-content;
+  width: 400px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: "Kiwi Maru", serif;
+  margin: 30px auto;
+  margin-bottom: 60px;
+  background-color: white;
+}
+.post-head {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px 5px 5px 0px;
+  box-sizing: border-box;
+  align-items: center;
+  height: max-content;
+  font-size: 13px;
+}
+.post-creator {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 28%;
+}
+.post-creator-name {
+  font-weight: 600;
+  line-height: 12px;
+  text-transform: capitalize;
+}
+.post-location {
+  color: gray;
+}
+.post-creator-pic {
+  display: flex;
+  flex-direction: row;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.post-creator-pic > img {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+}
+.post-creator-details {
+  text-align: left;
+}
+.post-creator-details div {
+  width: max-content;
+}
+/*  */
+
+.post-img {
+  width: 100%;
+  height: auto;
+  max-height: 600px;
+}
+.post-options {
+  position: absolute;
+  width: 30%;
+  height: 15%;
+  right: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 5px 0px 0px 85px;
+  box-sizing: border-box;
+}
+/*  */
+.post-icon {
+  margin-left: 4px;
+  width: 20px;
+  height: 20px;
+  margin-top: 10px;
+}
+.post-likes {
+  margin-left: 10px;
+}
+.post-caption {
+  margin: 10px;
+  text-transform: capitalize;
+  margin-bottom: 25px;
+  font-size: 15px;
+}
+/* COMMENT SECTION */
+.view-comments {
+  margin-left: 10px;
+  font-size: 12px;
+  color: gray;
+  padding: 0px;
+  border: none;
+  background-color: white;
+  cursor: pointer;
+}
+.post-comment-sec {
+  padding-right: 6px;
+}
+.comments-container {
+  margin-left: 10px;
+}
+.commenter {
+  color: black;
+}
+.del-comment-btn {
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  border: none;
+  font-weight: bold;
+  font-size: 12px;
+  background: #8080807d;
+  font-family: cursive;
+  padding: 0px 6px;
+  padding-bottom: 3px;
+  border-radius: 4px;
+}
+form {
+  display: flex;
+  margin-bottom: 10px;
+}
+.comment-box {
+  border: 0px;
+  margin-left: 10px;
+  line-height: 30px;
+  width: -webkit-fill-available;
+  font-size: 13px;
+}
+.comment-box:active,
+.comment-box:focus {
+  outline: none;
+}
+.comment-box::placeholder {
+  font-size: 12px;
+}
+.add-comment-btn {
+  width: max-content;
+  background-color: transparent;
+  border: none;
+  color: dodgerblue;
+}
+.add-comment-btn > ion-icon {
+  width: 20px;
+  margin: 0;
+}
+.post-comment-ts {
+  font-size: 10px;
+  color: gray;
+}
+.comment-item {
+  word-break: break-all;
+}
+a,
+a:active {
+  text-decoration: none;
+  color: black;
+}

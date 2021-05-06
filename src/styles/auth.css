@@ -1,0 +1,78 @@
+body {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+.App {
+  font-family: sans-serif;
+  /* font-family: monospace; */
+}
+.signin-container,
+.signup-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: max-content;
+  margin: 0 auto;
+}
+.Signin,
+.Signup {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 250px;
+  border: 1px solid black;
+  align-items: stretch;
+  width: 260px;
+  margin: 50px auto;
+  padding: 0px 30px;
+}
+.Signup {
+  height: max-content;
+}
+.name,
+.email,
+.password {
+  width: 260px;
+  display: flex;
+  justify-content: space-between;
+  line-height: 32px;
+}
+.password > input,
+.email > input,
+.name > input {
+  border: 0px;
+  border-bottom: 1px solid black;
+  font-size: 18px;
+  width: 170px;
+  margin-left: -10px;
+}
+.confirmPassword {
+  line-height: 20px;
+}
+.login-btn,
+.signup-btn {
+  padding: 5px 0px;
+  font-size: 18px;
+  font-stretch: ultra-expanded;
+  background-color: dodgerblue;
+  border: 0px;
+  color: white;
+  text-transform: uppercase;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.noaccount,
+.alreadyaccount {
+  border: 1px solid black;
+  padding: 20px 45px;
+}
+input::placeholder {
+  color: rebeccapurple;
+  font-size: 10px;
+}
