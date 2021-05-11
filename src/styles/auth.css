@@ -79,7 +79,17 @@
   background: white;
   font-size: 2rem;
 }
+/*
+ *
+ *
+ *
+ * SIGNUP IMAGE UPLOAD *
+ *
+ *
+ *
+ */
 .upload-dp-form {
+  font-size: 1.6rem;
   display: flex;
   flex-direction: column;
   width: 13rem;

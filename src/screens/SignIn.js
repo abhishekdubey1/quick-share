@@ -11,7 +11,8 @@ const SignIn = () => {
   useTitle("Login - Instagram");
   const { handleChange, values } = useForm(initialState);
 
-  async function handleSignIn() {
+  async function handleSignIn(e) {
+    e.preventDefault();
     if (values.email.toString().trim() && values.password.toString().trim()) {
       try {
         const { data } = await axios.post(`${apiEndPoint}/signin`, {
@@ -32,7 +33,7 @@ const SignIn = () => {
 
   return (
     <div className="signin-container">
-      <div className="Signin">
+      <form className="Signin" onSubmit={handleSignIn}>
         <div className="form-group">
           <label
             htmlFor="email"
@@ -71,12 +72,12 @@ const SignIn = () => {
           />
         </div>
         <button
+          type="submit"
           className={`login-btn ${!validateData(values) && "disabled"}`}
-          onClick={handleSignIn}
         >
           Log In
         </button>
-      </div>
+      </form>
 
       <NoAccount />
     </div>
