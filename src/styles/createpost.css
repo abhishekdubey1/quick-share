@@ -5,7 +5,7 @@
   width: 100%;
   max-width: 50rem;
   min-width: 30rem;
-  min-height: 15rem;
+  min-height: 40rem;
   height: max-content;
   margin: 4rem auto;
   padding-left: 10rem;
@@ -73,9 +73,16 @@
   position: relative;
 }
 .upload {
-  width: 7rem;
+  border: 1px solid black;
+  text-align: center;
+  padding: 1rem 30px;
+  width: 20rem;
+  background: white;
+  margin: 15px 0px 5px 0px;
+  border-radius: 4px;
+  display: block;
 }
-.upload,
+/* .upload, */
 .submit-btn {
   height: fit-content;
   padding: 6px 28px;
@@ -83,4 +90,5 @@
   border: 1px solid black;
   cursor: pointer;
   font-size: 2rem;
+  margin: 15px 0px 0px 0px;
 }

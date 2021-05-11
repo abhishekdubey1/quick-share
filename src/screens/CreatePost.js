@@ -43,20 +43,32 @@ const CreatePost = () => {
   };
   return (
     <div className="createpost">
-      <Input
-        className="caption"
-        value={caption}
-        label="Caption"
-        placeholder="Caption for the body"
-        onChangeFn={(e) => setCaption(e.target.value)}
-      />
+      <div className="form-group">
+        <label
+          htmlFor="caption"
+          className={`${!caption ? "dn" : ""} auth-label`}
+        >
+          Caption
+        </label>
+        <input
+          style={{ margin: "10px 0px 0px 0px" }}
+          required
+          id="caption"
+          className="caption"
+          aria-label="Enter caption"
+          placeholder="Caption For Post"
+          value={caption}
+          onChange={(e) => setCaption(e.target.value)}
+        />
+      </div>
       <div className="create-post">
-        <label htmlFor="create" className="lb-upload">
+        <label htmlFor="create" className="upload">
           Upload
         </label>
         <input
           type="file"
           id="create"
+          className="dn"
           onChange={onSelectFile}
           ref={ipRef}
           accept="image/*"
@@ -71,7 +83,7 @@ const CreatePost = () => {
         {image && <img src={preview} alt="" className="img-preview" />}
         {!image && "No - Image"}
       </div>
-      <div>
+      <div style={{ margin: "10px" }}>
         <button
           className={`submit-btn ${status === "loading" ? "loading" : ""}`}
           onClick={savePicToCloud}
