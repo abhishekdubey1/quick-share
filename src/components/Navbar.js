@@ -81,6 +81,8 @@ const NavBar = () => {
       <br />
       <br />
       <br />
+      <br />
+      <br />
     </>
   ) : (
     <nav className="nav-logo">

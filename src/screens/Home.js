@@ -24,12 +24,9 @@ const Home = () => {
 
   const handleFetchPosts = async () => {
     try {
-      console.log("tried");
       if (isMounted) {
-        console.log("making");
         setAppState({ status: "loading", data: [] });
         const response = await fetchPosts();
-        console.log("got");
         if (isMounted) {
           setAppState({ status: "accepted", data: response.data });
         }
