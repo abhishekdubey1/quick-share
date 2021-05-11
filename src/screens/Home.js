@@ -26,8 +26,10 @@ const Home = () => {
     try {
       console.log("tried");
       if (isMounted) {
+        console.log("making");
         setAppState({ status: "loading", data: [] });
         const response = await fetchPosts();
+        console.log("got");
         if (isMounted) {
           setAppState({ status: "accepted", data: response.data });
         }
@@ -76,8 +78,8 @@ const Home = () => {
         </>
       )}
       {status === "loading" && (
-        <div class="loader-preview">
-          <div class="instagram-loader">
+        <div className="loader-preview">
+          <div className="instagram-loader">
             <div>
               <div></div>
               <div></div>

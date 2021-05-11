@@ -41,6 +41,10 @@
   justify-content: space-between;
   width: 17.5rem;
 }
+.nav-logo {
+  padding: 15px;
+  background: white;
+}
 /**
 *
 *
