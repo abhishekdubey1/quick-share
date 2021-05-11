@@ -23,7 +23,7 @@ const SignIn = () => {
         localStorage.setItem("user", JSON.stringify(data.user));
         dispatch({ type: "USER", payload: data.user });
         alert("Signed In Successfully");
-        history.push("/");
+        history.push("/profile");
       } catch (error) {
         alert("There was some error");
         console.log(error);
