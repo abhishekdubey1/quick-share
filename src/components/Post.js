@@ -1,20 +1,35 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { likePost, unlikePost } from "../utils/apiCalls";
+// import { initialState } from "../utils/helper";
 import { CommentBtn, DeleteBtn, LikeBtn, UnLikeBtn } from "./Svg";
-function Post({
-  postActions,
-  src,
-  likes,
-  isOwnPost,
-  postId,
-  caption,
-  postedBy,
-  isLiked,
-}) {
-  const handleLike = () => {
-    console.log("called handleLike");
-    return isLiked ? unlikePost(postId) : likePost(postId);
+function Post(props) {
+  const { src, likes, isOwnPost, postId, isLiked } = props;
+  const { caption, postedBy, likeFunction } = props;
+  const [status, setStatus] = useState("idle");
+  const handleLike = async () => {
+    if (!isLiked) {
+      setStatus("loading");
+      const response = await likePost(postId);
+      if (response.status === 200) {
+        likeFunction(response.data);
+      }
+      setStatus("accepted");
+    }
   };
+  const handleUnlike = async () => {
+    if (isLiked) {
+      setStatus("loading");
+      const response = await unlikePost(postId);
+      if (response.status === 200) {
+        likeFunction(response.data);
+      }
+      setStatus("accepted");
+    }
+  };
+  const isAccepted = () =>
+    status === "accepted" || status === "idle" ? true : false;
+
   const deletePost = () => {
     let answer = window.confirm("Are you sure you want to delete?");
     alert(answer ? "Deleted the Post!" : "Okay!");
@@ -46,8 +61,9 @@ function Post({
         </div>
       </Link>
       <div className="post-features">
-        {!isLiked && <LikeBtn handleLike={handleLike} />}
-        {isLiked && <UnLikeBtn handleLike={handleLike} />}
+        {!isLiked && isAccepted() && <LikeBtn handleLike={handleLike} />}
+        {isLiked && isAccepted() && <UnLikeBtn handleLike={handleUnlike} />}
+        {status === "loading" && <div className="spin-loader" />}
         <Link to={`/post/${postId}`}>
           <CommentBtn />
         </Link>
@@ -58,7 +74,7 @@ function Post({
         </div>
       </div>
       <Link to={`/post/${postId}`}>
-        <button className="view-comments">View all comments</button>
+        <button className="view-comments">View comments</button>
       </Link>
     </div>
   );

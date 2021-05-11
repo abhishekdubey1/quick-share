@@ -115,3 +115,14 @@ export function useMount() {
   }, []);
   return isMounted.current;
 }
+// const initialState = {
+//   status: "idle",
+//   data: null,
+//   error: null,
+// };
+// export function useAppState(initial) {
+//   const [{ data, error, status }, setAppState] = useState(
+//     ...initialState,
+//     ...initial
+//   );
+// }

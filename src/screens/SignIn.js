@@ -33,27 +33,41 @@ const SignIn = () => {
   return (
     <div className="signin-container">
       <div className="Signin">
-        <div className="email">
-          <label htmlFor="email">Email</label>
+        <div className="form-group">
+          <label
+            htmlFor="email"
+            className={`${!values.email ? "dn" : ""} auth-label`}
+          >
+            Email
+          </label>
           <input
+            type="email"
+            required
             id="email"
+            className="email"
             aria-label="Enter Email"
-            placeholder="Enter Email"
+            placeholder="Email"
             value={values.email}
             onChange={handleChange}
-            required
           />
         </div>
-        <div className="password">
-          <label htmlFor="password">Password</label>
+        <div className="form-group">
+          <label
+            htmlFor="password"
+            className={`${!values.password ? "dn" : ""} auth-label`}
+          >
+            Password
+          </label>
           <input
-            id="password"
-            aria-label="Enter Password"
-            placeholder="Enter Password"
             type="password"
+            required
+            id="password"
+            className="password"
+            name="monster"
+            placeholder="Password"
+            aria-label="Enter Password"
             value={values.password}
             onChange={handleChange}
-            required
           />
         </div>
         <button

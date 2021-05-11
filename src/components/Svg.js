@@ -121,7 +121,7 @@ export const DeleteBtn = (props) => (
 );
 
 export const UnLikeBtn = (props) => (
-  <span onClick={props.handleLike} className="unlike-btn post-icon">
+  <span onClick={props.handleLike} className="unlike-btn post-icon cu-po">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       className="post-icon"
@@ -137,7 +137,7 @@ export const UnLikeBtn = (props) => (
 );
 
 export const LikeBtn = (props) => (
-  <span onClick={props.handleLike} className="like-btn post-icon">
+  <span onClick={props.handleLike} className="like-btn post-icon cu-po">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 512 512"

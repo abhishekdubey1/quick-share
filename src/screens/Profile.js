@@ -7,7 +7,7 @@ const Profile = () => {
   const [mypics, setPics] = useState([]);
   console.log(mypics);
   const { state, dispatch } = useContext(UserContext);
-  let { dpUrl, name, email, followers, following, postsCount } = state
+  let { data, dpUrl, name, email, followers, following, postsCount } = state
     ? state
     : JSON.parse(localStorage.getItem("user"));
   const [image, setImage] = useState("");
@@ -77,9 +77,26 @@ const Profile = () => {
           <img src={dpUrl} alt={`Display of ${name}`} />
         </div>
         <section className="profile-details">
+          <div className="profile-head">
+            <h1 className="profile-name">{name}</h1>
+            {false && (
+              <button onClick={() => console.log("edit")}>Edit Profile</button>
+            )}
+          </div>
+          <ul className="profile-stats">
+            <li>
+              <b>{postsCount || 0}</b> posts
+            </li>
+            <li>
+              <b>{followers.length}</b> followers
+            </li>
+            <li>
+              <b>{following.length}</b> followings
+            </li>
+          </ul>
           <div className="profile-main">
             <h2 className="profile-username">{email}</h2>
-            <div className="profile-follow-btn">
+            <div className="profile-follow-btn" style={{ width: "200px" }}>
               {false && (
                 <button
                   className=""
@@ -93,25 +110,11 @@ const Profile = () => {
               )}
             </div>
           </div>
-          <ul className="profile-stats">
-            <li>
-              <b>{postsCount || 0}</b> posts
-            </li>
-            <li>
-              <b>{followers.length}</b> followers
-            </li>
-            <li>
-              <b>{following.length}</b> followings
-            </li>
-          </ul>
-          <div className="profile-head">
-            <h1 className="profile-name">{name}</h1>
-          </div>
         </section>
       </header>
       <div className="profile-posts-container">
-        {false &&
-          [].map((el) => (
+        {data?.length &&
+          data.map((el) => (
             <div key={el[0]} className="profile-posts-columns">
               {el.map((inEl) => (
                 <div key={inEl} className="profile-posts-row">

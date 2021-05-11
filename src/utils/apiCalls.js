@@ -8,13 +8,13 @@ const headers = {
 export const likePost = async (postId) => {
   console.log("liking in process");
   try {
-    const { data } = await axios.put(
+    const response = await axios.put(
       `${apiEndPoint}/like`,
       { postId },
       { ...headers }
     );
-    return data;
-    // setData(newData);
+    console.log(response.data);
+    return response;
   } catch (error) {
     alert("There was some error");
     console.log(error);
@@ -22,28 +22,31 @@ export const likePost = async (postId) => {
   }
 };
 export const unlikePost = async (postId) => {
+  console.log("unliking in process");
   try {
-    const { data } = await axios.put(
+    const response = await axios.put(
       `${apiEndPoint}/unlike`,
       { postId },
       { ...headers }
     );
-    console.log(data);
-    return data;
+    console.log(response.data);
+    return response;
   } catch (error) {
     alert("There was some error");
     console.log(error);
+    // return error;
   }
 };
-export const fetchPosts = async (setter) => {
+export const fetchPosts = async () => {
   try {
-    const { data } = await axios(`${apiEndPoint}/allposts`, { ...headers });
-    console.log(data);
-    setter(data);
-    return data;
+    console.log("making request");
+    const response = await axios(`${apiEndPoint}/allposts`, { ...headers });
+    console.log("res from server");
+    return response;
   } catch (error) {
+    alert("There was some error");
     console.log(error);
-    alert("Oops! there was an error");
+    throw new Error(error);
     // return error;
   }
 };

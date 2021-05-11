@@ -1,23 +1,59 @@
-body {
-  background: #efefef;
-}
-.navbar {
+.nav-container {
   display: flex;
-  justify-content: space-around;
-  margin: 0px 0px 0px 0px;
-  padding: 20px 5px 20px 5px;
-  font-family: monospace;
+  justify-content: center;
   align-items: center;
-  height: 40px;
-  background: white;
-  font-size: 16px;
+  height: 5.4rem;
+  border-bottom: 1px solid rgba(219, 219, 219, 1);
+  position: fixed;
+  top: 0;
+  transition: height 0.2s ease-in-out;
+  width: 100%;
+  z-index: 3;
+  background-color: white;
 }
-.logo {
-  display: block;
-  padding: 20px 5px 25px 20px;
+.nav {
+  height: 5.4rem;
+  padding: 0 2rem;
+  transition: height 0.2s ease-in-out;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 
-/* Search bar css */
+.logo {
+  width: 10rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.logo-img {
+  width: 10rem;
+  max-height: 100%;
+  max-width: 100%;
+  -o-object-fit: contain;
+  object-fit: contain;
+  margin-top: 7px;
+}
+.nav-links {
+  display: flex;
+  justify-content: space-between;
+  width: 17.5rem;
+}
+/**
+*
+*
+*
+*
+*
+ Search bar css 
+*
+*
+*
+*
+*
+**/
 .search-input-wrap {
   position: relative;
   display: block;
@@ -69,8 +105,12 @@ input[type="search"] {
   outline: 0;
 }
 .isOnline {
-  height: 10px;
-  width: 10px;
-  margin-left: 10px;
+  height: 1rem;
+  width: 1rem;
+  margin-left: 1rem;
   border-radius: 50%;
 }
+.nav-icon {
+  width: 2.5rem;
+}
+/* https://www.instagram.com/static/images/web/mobile_nav_type_logo-2x.png/1b47f9d0e595.png */

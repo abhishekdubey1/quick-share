@@ -44,34 +44,32 @@ const CreatePost = () => {
   return (
     <div className="createpost">
       <Input
-        className="title"
+        className="caption"
         value={caption}
         label="Caption"
         placeholder="Caption for the body"
         onChangeFn={(e) => setCaption(e.target.value)}
       />
-      <input
-        type="file"
-        id="createpost"
-        onChange={onSelectFile}
-        ref={ipRef}
-        accept="image/*"
-      />
-      <div className="createpost-custom">
-        <label htmlFor="createpost" className="upload">
+      <div className="create-post">
+        <label htmlFor="create" className="lb-upload">
           Upload
         </label>
-        <div className="image-name ps-rel">
-          {image && (
-            <>
-              <img src={preview} alt="" className="img-preview" />
-              <button className="clear-image" onClick={clearImage}>
-                X
-              </button>
-            </>
-          )}
-          {!image && "No - Image"}
-        </div>
+        <input
+          type="file"
+          id="create"
+          onChange={onSelectFile}
+          ref={ipRef}
+          accept="image/*"
+        />
+        {image && (
+          <div className="clear-img-box">
+            <button className="clear-img" onClick={clearImage}>
+              X
+            </button>
+          </div>
+        )}
+        {image && <img src={preview} alt="" className="img-preview" />}
+        {!image && "No - Image"}
       </div>
       <div>
         <button

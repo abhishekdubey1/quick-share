@@ -2,6 +2,7 @@ import NavBar from "./Navbar";
 import { BrowserRouter } from "react-router-dom";
 import { UserProvider } from "../context/UserContext";
 import { Routing } from "../utils/Routing";
+import "../styles/main.css";
 import "../styles/auth.css";
 import "../styles/createpost.css";
 import "../styles/navbar.css";

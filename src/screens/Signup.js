@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import {
   apiEndPoint,
@@ -6,37 +5,29 @@ import {
   hookupcloudUrl,
   validateData,
 } from "../utils/helper";
-import { useTitle, useForm } from "../utils/customHooks";
+import { useTitle, useForm, useImage } from "../utils/customHooks";
 import axios from "axios";
+const initialState = {
+  name: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+};
+
 const SignUp = () => {
   const history = useHistory();
-  const initialState = {
-    signupEmail: "",
-    signupName: "",
-    signupPassword: "",
-    confirmPassword: "",
-  };
-  const [image, setImage] = useState(""); //this is image file
-  const [src, setSrc] = useState(defaultSrc); //this is to show preview
   const { handleChange, values } = useForm(initialState);
-  useEffect(() => {
-    if (image) {
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(image);
-      fileReader.addEventListener("load", function () {
-        setSrc(`${this.result}`);
-      });
-    }
-  }, [image]);
+  const { name, email, password, confirmPassword } = values;
+  const { clearImage, ipRef, onSelectFile, image, preview } = useImage();
   useTitle("Sign Up - Instagram");
 
   async function submitForm(dpUrl = defaultSrc) {
-    if (values.signupName && values.signupPassword && values.signupEmail) {
+    if (name && password && email && password === confirmPassword) {
       try {
         const { data } = await axios.post(`${apiEndPoint}/signup`, {
-          name: values.signupName.toString().trim() || "Chan",
-          password: values.signupPassword || "chan1234", //values.password,
-          email: values.signupEmail.toString().trim() || "chan@gmail.com", //values.email,
+          name: name.toString().trim() || "Chan",
+          password: password || "chan1234", //password,
+          email: email.toString().trim() || "chan@gmail.com", //email,
           dpUrl,
         });
         alert(data.message);
@@ -46,7 +37,7 @@ const SignUp = () => {
       }
     }
   }
-  async function uploadPic(params) {
+  async function uploadPic() {
     if (image) {
       const data = new FormData();
       data.append("file", image);
@@ -64,89 +55,105 @@ const SignUp = () => {
       submitForm();
     }
   }
-  const clearImage = () => {
-    setImage("");
-    setSrc(defaultSrc);
-  };
   return (
     <div className="signup-container">
       <Alreadyaccount />
       <div className="Signup">
-        <div className="name">
-          <label htmlFor="signupName">Name</label>
+        <div className="form-group">
+          <label htmlFor="name" className={`${!name ? "dn" : ""} auth-label`}>
+            Name
+          </label>
           <input
-            id="signupName"
-            placeholder="Enter Name"
-            type="text"
-            value={values.signupName}
+            required
+            id="name"
+            className="name"
+            placeholder="Name"
+            aria-label="Enter Name"
+            value={name}
             onChange={handleChange}
           />
         </div>
-        <div className="email">
-          <label htmlFor="signupEmail">Email</label>
+        <div className="form-group">
+          <label htmlFor="email" className={`${!email ? "dn" : ""} auth-label`}>
+            Email
+          </label>
           <input
-            id="signupEmail"
-            placeholder="Enter Email"
             type="email"
-            value={values.signupEmail}
+            required
+            id="email"
+            className="email"
+            aria-label="Enter Email"
+            placeholder="Email"
+            value={email}
             onChange={handleChange}
           />
         </div>
-        <div className="password">
-          <label htmlFor="signupPassword">Password</label>
+        <div className="form-group">
+          <label
+            htmlFor="password"
+            className={`${!password ? "dn" : ""} auth-label`}
+          >
+            Password
+          </label>
           <input
-            id="signupPassword"
-            placeholder="Enter Password"
             type="password"
-            value={values.signupPassword}
+            required
+            id="password"
+            className="password"
+            placeholder="Password"
+            aria-label="Enter Password"
+            value={password}
             onChange={handleChange}
           />
         </div>
-        <div className="password confirmPassword">
-          <label htmlFor="confirmPassword">Confirm Password</label>
+        <div className="form-group">
+          <label
+            htmlFor="confirm-password"
+            className={`${!confirmPassword ? "dn" : ""} auth-label`}
+          >
+            Confirm Password
+          </label>
           <input
+            type="password"
+            required
             id="confirmPassword"
+            className="confirm-password"
             placeholder="Confirm Password"
-            type="password"
-            value={values.confirmPassword}
+            aria-label="Enter Password"
+            value={confirmPassword}
             onChange={handleChange}
           />
         </div>
+      </div>
+      <div className="upload-dp-form">
+        <label htmlFor="create" className="lb-upload">
+          Add a Display Picture
+        </label>
         <input
           type="file"
-          id="createpost"
-          onChange={(e) => setImage(e.target.files[0])}
+          id="create"
+          onChange={onSelectFile}
+          className="ip-upload"
+          ref={ipRef}
           accept="image/*"
         />
-        <div className="createpost-custom">
-          <label htmlFor="createpost" className="upload">
-            Upload
-          </label>
-          <div className="image-name ps-rel">
-            {image ? (
-              <div className="">
-                <img src={src} alt="" className="img-preview" />
-                <button className="clear-image" onClick={clearImage}>
-                  X
-                </button>
-              </div>
-            ) : (
-              <img
-                src={defaultSrc}
-                alt=""
-                className="img-preview"
-                style={{ width: "80px" }}
-              />
-            )}
+        {image && (
+          <div className="clear-dp-box">
+            <button className="clear-dp" onClick={clearImage}>
+              X
+            </button>
           </div>
-        </div>
-        <button
-          className={`signup-btn  ${!validateData(values) && "disabled"}`}
-          onClick={uploadPic}
-        >
-          Sign up
-        </button>
+        )}
+        {image && <img src={preview} alt="" className="dp-preview" />}
+        {!image && "No - Image"}
       </div>
+
+      <button
+        className={`signup-btn  ${!validateData(values) && "disabled"}`}
+        onClick={uploadPic}
+      >
+        Sign up
+      </button>
     </div>
   );
 };

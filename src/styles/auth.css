@@ -1,60 +1,66 @@
-body {
-  padding: 0px;
-  margin: 0px;
-  box-sizing: border-box;
-}
-.App {
-  font-family: sans-serif;
-  /* font-family: monospace; */
-}
 .signin-container,
 .signup-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: inherit;
   width: max-content;
   margin: 0 auto;
 }
-.Signin,
-.Signup {
+.Signup,
+.Signin {
+  font-family: sans-serif;
+  box-sizing: border-box;
+  /* background-color: #484d60; */
+  background: #ffffff;
+  height: 25rem;
+  width: max-content;
+  padding: 1rem 2.5rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  height: 250px;
-  border: 1px solid black;
-  align-items: stretch;
-  width: 260px;
-  margin: 50px auto;
-  padding: 0px 30px;
+  justify-content: space-around;
+  margin: 3rem 0px;
 }
 .Signup {
-  height: max-content;
+  height: 30rem;
+  padding: 1rem 3rem;
 }
-.name,
+.form-group {
+  position: relative;
+  width: max-content;
+}
 .email,
-.password {
-  width: 260px;
-  display: flex;
-  justify-content: space-between;
-  line-height: 32px;
+.password,
+.name,
+.confirm-password {
+  line-height: 2rem;
+  font-size: 1.6rem;
+  padding: 0px 1.4rem;
+  height: 5.2rem;
+  background: #ffffff;
+  border: 1px solid #4d5869;
+  border-radius: 4px;
+  font-size: 1.8rem;
+  color: #484d60;
 }
-.password > input,
-.email > input,
-.name > input {
-  border: 0px;
-  border-bottom: 1px solid black;
-  font-size: 18px;
-  width: 170px;
-  margin-left: -10px;
+.auth-label {
+  position: absolute;
+  transform: translateY(-50%);
+  left: 1.2rem;
+  padding: 0 4px;
+  background: #fff;
+  color: #4d5869;
+  font-weight: 500;
+  font-size: 1.4rem;
+  line-height: 21rem;
 }
+
 .confirmPassword {
-  line-height: 20px;
+  line-height: 2rem;
 }
 .login-btn,
 .signup-btn {
   padding: 5px 0px;
-  font-size: 18px;
+  font-size: 1.8rem;
   font-stretch: ultra-expanded;
   background-color: dodgerblue;
   border: 0px;
@@ -70,9 +76,38 @@ body {
 .noaccount,
 .alreadyaccount {
   border: 1px solid black;
-  padding: 20px 45px;
+  padding: 2rem 1.6rem;
+  background: white;
+  font-size: 2rem;
 }
-input::placeholder {
-  color: rebeccapurple;
-  font-size: 10px;
+.upload-dp-form {
+  display: flex;
+  flex-direction: column;
+  width: 13rem;
+  margin-bottom: 1rem;
+}
+.ip-upload {
+  opacity: 0;
+  width: 0;
+  height: 1rem;
+}
+.lb-upload {
+  border: 1px solid black;
+  text-align: center;
+  padding: 1rem 0px;
+  width: 20rem;
+  background: white;
+}
+.clear-dp-box {
+  text-align: right;
+}
+.clear-dp {
+  width: max-content;
+  padding: 2px 5px;
+}
+.dp-preview {
+  width: 9rem;
+  height: 9rem;
+  border-radius: 50%;
+  margin-top: -1rem;
 }

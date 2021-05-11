@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
-import { likePost } from "../utils/apiCalls";
+// import { likePost } from "../utils/apiCalls";
 import { apiEndPoint } from "../utils/helper";
 import CommentBox from "./CommentBox";
 import { DeleteBtn, LikeBtn, UnLikeBtn } from "./Svg";
@@ -9,6 +9,7 @@ import { DeleteBtn, LikeBtn, UnLikeBtn } from "./Svg";
 function SinglePost(props) {
   const { postIdParam } = useParams();
   const [postState, setPostState] = useState({});
+  // const [status, setStatus] = useState("idle");
   const isOwnPost = postState.postedBy?._id === props?.userId;
   const isLiked = postState?.likes?.includes(props?.userId);
   const isMounted = useRef(true);
@@ -78,7 +79,7 @@ function SinglePost(props) {
         <img src={postState?.postUrl} alt="Post" className="post-img" />
       </div>
       <div className="post-features">
-        {!isLiked && <LikeBtn likePost={() => likePost(postState?._id)} />}
+        {!isLiked && <LikeBtn likePost={() => console.log("liked")} />}
         {isLiked && <UnLikeBtn onClick={() => console.log("unliked")} />}
         <div className="post-likes fs-sm">
           {postState?.likes?.length + " Like"}

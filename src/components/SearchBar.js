@@ -1,6 +1,6 @@
-const SearchBar = () => {
+const SearchBar = ({ className }) => {
   return (
-    <label className="search-input-wrap" htmlFor="search-bar">
+    <label className={"search-input-wrap " + className} htmlFor="search-bar">
       <h1 id="search-title" className="screen-reader-text">
         Search
       </h1>

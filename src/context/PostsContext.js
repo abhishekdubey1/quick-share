@@ -5,10 +5,14 @@ export const initialContextState = [];
 
 const userReducer = (state = initialContextState, { type, payload }) => {
   switch (type) {
-    case "CREATE":
+    case "SET":
       return payload;
     case "CLEAR":
-      return null;
+      return [];
+    case "LIKE":
+      return;
+    case "UNLIKE":
+      return;
     default:
       return state;
   }

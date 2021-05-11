@@ -1,7 +1,7 @@
 import { createContext, useReducer } from "react";
 
 export const UserContext = createContext();
-export const initialState = null;
+const initialState = null;
 
 const userReducer = (state = initialState, { type, payload }) => {
   switch (type) {
