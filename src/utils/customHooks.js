@@ -106,7 +106,7 @@ export function useImage() {
 }
 
 export function useMount() {
-  const isMounted = useRef(null);
+  const isMounted = useRef(true);
   useEffect(() => {
     isMounted.current = true;
     return () => {

@@ -40,8 +40,6 @@ const Home = () => {
   const likeFunction = (postData) => {
     const newData = data.map((post) => {
       if (postData.id === post.id) {
-        console.log({ post });
-        console.log({ postData });
         return { ...post, ...postData };
       }
       return post;
@@ -85,13 +83,13 @@ const Home = () => {
         </div>
       )}
       {status === "rejected" && (
-        <>
+        <div style={{ fontSize: "25px" }}>
           <p role="alert">
             Some error
             <span>{error?.message}</span>
           </p>
           <button onClick={handleFetchPosts}>Try refetching?</button>
-        </>
+        </div>
       )}
     </div>
   );
