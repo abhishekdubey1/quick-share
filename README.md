@@ -1,8 +1,10 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with Create React App
+<br />
 <a href="https://quick-shareit.vercel.app/">View Live Project</a>
-In this project I have created some custom React hooks.
 
-<h2>Those are:</h2>
+<h2>
+In this project I have created some custom React hooks.
+Those are:</h2>
 
 - useWindowSize
 
@@ -16,8 +18,8 @@ In this project I have created some custom React hooks.
 
 - useMount
 
-<h2>Also, have added Error handling and loaders.
-Features:</h2>
+<h2>Also, have added Error handling and loaders.</h2>
+<h2>Features:</h2>
 
 - Upload Image(Post)
 
