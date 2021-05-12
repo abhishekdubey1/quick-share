@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { initialState } from "../utils/helper";
 import { useImage, useTitle } from "../utils/customHooks";
-import { Input } from "../components/Element-Component";
 import { uploadToCloud, createPost } from "../utils/apiCalls";
 
 const CreatePost = () => {
