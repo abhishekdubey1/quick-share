@@ -39,8 +39,12 @@ Features:</h2>
 
 - Custom Hooks
 
-<h2>Folder Structure:</h2>
+<h2>Folder Structure</h2>
+
 - components -> Has all reusable components
+
 - screens -> All screens in the application
+
 - styles -> styles for all screens and components
+
 - utils -> has files like apiCalls, customHooks, helpers, Routing
