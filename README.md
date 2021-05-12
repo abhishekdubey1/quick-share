@@ -16,27 +16,31 @@ In this project I have created some custom React hooks.
 
 - useMount
 
-Also, have added Error handling and loaders.
-Features:
+<h2>Also, have added Error handling and loaders.
+Features:</h2>
 
-# Upload Image(Post)
+- Upload Image(Post)
 
-# Create Account and Login into and Logout(Auth)
+- Create Account and Login into and Logout(Auth)
 
-# Routing to different pages without reloading
+- Routing to different pages without reloading
 
-# Option to Like and Comment on Post
+- Option to Like and Comment on Post
 
-About Code:
+<h2>About Code:</h2>
 
-# Considered Readability
+- Considered Readability
 
-# Considered Reusablility
+- Considered Reusablility
 
-# Component Structure
+- Component Structure
 
-# CSS only, no external libraries
+- CSS only, no external libraries
 
-# Custom Hooks
+- Custom Hooks
 
-Folder Structure: # components # Has all reusable components # screens # All screens in the application # styles # styles for all screens and components # utils # has files like apiCalls, customHooks, helpers, Routing
+<h2>Folder Structure:</h2>
+- components -> Has all reusable components
+- screens -> All screens in the application
+- styles -> styles for all screens and components
+- utils -> has files like apiCalls, customHooks, helpers, Routing
