@@ -1,19 +1,20 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 <a href="https://quick-shareit.vercel.app/">View Live Project</a>
 In this project I have created some custom React hooks.
-Those are:
 
-# useWindowSize
+<h2>Those are:</h2>
 
-# useTitle
+- useWindowSize
 
-# useForm
+- useTitle
 
-# useOnlineStatus
+- useForm
 
-# useImage
+- useOnlineStatus
 
-# useMount
+- useImage
+
+- useMount
 
 Also, have added Error handling and loaders.
 Features:
