@@ -73,6 +73,42 @@
   opacity: 0.5;
   cursor: default;
 }
+
+/*
+ *
+ *
+ *
+ *Auth Loader and Error
+ *
+ *
+ */
+.auth-loading {
+  font-size: 17px;
+  background: white;
+  margin-left: 10px;
+  padding: 10px;
+}
+.auth-loading::after {
+  font-size: 50px;
+}
+
+.error {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 20px solid #ff000091;
+  color: white;
+  font-size: 20px;
+  display: inline-block;
+  position: relative;
+  margin-left: 10px;
+  margin-top: 1px;
+}
+.error span {
+  position: absolute;
+  left: -3.5px;
+}
 .noaccount,
 .alreadyaccount {
   border: 1px solid black;
