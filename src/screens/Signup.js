@@ -3,6 +3,7 @@ import {
   apiEndPoint,
   defaultSrc,
   hookupcloudUrl,
+  ipClass,
   validateData,
 } from "../utils/helper";
 import { useTitle, useForm, useImage } from "../utils/customHooks";
@@ -57,6 +58,8 @@ const SignUp = () => {
   }
   return (
     <div className="signup-container">
+      <br />
+      <br />
       <Alreadyaccount />
       <div className="Signup">
         <div className="form-group">
@@ -66,7 +69,7 @@ const SignUp = () => {
           <input
             required
             id="name"
-            className="name"
+            className={`${ipClass("name", name)}`}
             placeholder="Name"
             aria-label="Enter Name"
             value={name}
@@ -81,7 +84,7 @@ const SignUp = () => {
             type="email"
             required
             id="email"
-            className="email"
+            className={`${ipClass("email", email)}`}
             aria-label="Enter Email"
             placeholder="Email"
             value={email}
@@ -99,7 +102,7 @@ const SignUp = () => {
             type="password"
             required
             id="password"
-            className="password"
+            className={`${ipClass("password", password)}`}
             placeholder="Password"
             aria-label="Enter Password"
             value={password}
@@ -117,7 +120,7 @@ const SignUp = () => {
             type="password"
             required
             id="confirmPassword"
-            className="confirm-password"
+            className={`${ipClass("confirm-password", confirmPassword)}`}
             placeholder="Confirm Password"
             aria-label="Enter Password"
             value={confirmPassword}
@@ -161,6 +164,6 @@ const SignUp = () => {
 export default SignUp;
 const Alreadyaccount = () => (
   <div className="alreadyaccount">
-    <Link to="/signin">Already have an account? Sign in</Link>
+    Already have an account? <Link to="/signin">Sign in</Link>
   </div>
 );

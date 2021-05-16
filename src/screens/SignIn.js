@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
-import { ROUTES, apiEndPoint, validateData } from "../utils/helper";
+import { ROUTES, apiEndPoint, validateData, ipClass } from "../utils/helper";
 import { useTitle, useForm } from "../utils/customHooks";
 import axios from "axios";
 const initialState = { email: "", password: "" };
@@ -11,6 +11,7 @@ const SignIn = () => {
   useTitle("Login - Instagram");
   const { handleChange, values } = useForm(initialState);
   const [status, setStatus] = useState("idle");
+  const [showPassword, setShowPassword] = useState(false);
   async function handleSignIn(e) {
     e.preventDefault();
     if (
@@ -41,6 +42,11 @@ const SignIn = () => {
   return (
     <div className="signin-container">
       <form className="Signin" onSubmit={handleSignIn}>
+        <img
+          src="https://www.instagram.com/static/images/web/mobile_nav_type_logo-2x.png/1b47f9d0e595.png"
+          alt="instagram logo"
+          className="logo-img signin-img"
+        />
         <div className="form-group">
           <label
             htmlFor="email"
@@ -52,7 +58,7 @@ const SignIn = () => {
             type="email"
             required
             id="email"
-            className="email"
+            className={`${ipClass("email", values.email)}`}
             aria-label="Enter Email"
             placeholder="Email"
             value={values.email}
@@ -67,16 +73,24 @@ const SignIn = () => {
             Password
           </label>
           <input
-            type="password"
+            type={`${showPassword ? "text" : "password"}`}
             required
             id="password"
-            className="password"
-            name="monster"
+            className={`${ipClass("password ", values.password)}`}
             placeholder="Password"
             aria-label="Enter Password"
             value={values.password}
             onChange={handleChange}
           />
+          {values.password && (
+            <div
+              role="button"
+              className="show-pwd"
+              onClick={() => setShowPassword((s) => !s)}
+            >
+              Show
+            </div>
+          )}
         </div>
         <button
           type="submit"
@@ -87,6 +101,10 @@ const SignIn = () => {
         >
           Log{status === "loading" && "ing "} In
         </button>
+        <div className="signin-or">OR</div>
+        <div className="signin-fb-btn">
+          <span className="fb-icon">f</span>Log in with Facebook
+        </div>
       </form>
       {status === "rejected" && (
         <span className="auth-loading auth-err" role="alert">
@@ -107,7 +125,7 @@ const SignIn = () => {
 };
 const NoAccount = () => (
   <div className="noaccount">
-    <Link to={ROUTES.SIGN_UP}>Don't have an account? Sign up</Link>
+    Don't have an account? <Link to={ROUTES.SIGN_UP}>Sign up</Link>
   </div>
 );
 export default SignIn;

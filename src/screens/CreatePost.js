@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { initialState } from "../utils/helper";
+import { initialState, ipClass } from "../utils/helper";
 import { useImage, useTitle } from "../utils/customHooks";
 import { uploadToCloud, createPost } from "../utils/apiCalls";
 
@@ -53,7 +53,7 @@ const CreatePost = () => {
           style={{ margin: "10px 0px 0px 0px" }}
           required
           id="caption"
-          className="caption"
+          className={`${ipClass("caption", caption)}`}
           aria-label="Enter caption"
           placeholder="Caption For Post"
           value={caption}
