@@ -4,8 +4,7 @@ import { useTitle } from "../utils/customHooks";
 import { capitalize } from "../utils/helper";
 
 const Profile = () => {
-  const [mypics, setPics] = useState([]);
-  console.log(mypics);
+  const [, setPics] = useState([]);
   const { state, dispatch } = useContext(UserContext);
   let { data, dpUrl, name, email, followers, following, postsCount } = state
     ? state
@@ -122,7 +121,7 @@ const Profile = () => {
                     <img
                       className="profile-posts"
                       src={"imgUrl"}
-                      alt="post by katy"
+                      alt={"post by" + name}
                     />
                   }
                 </div>

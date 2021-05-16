@@ -12,7 +12,7 @@ let initialState = {
 };
 const Profile = () => {
   const [user, setUser] = useState(initialState);
-  const [, setPosts] = useState([]);
+  const [posts, setPosts] = useState([]);
   const { userid } = useParams();
   useEffect(() => {
     fetchUser(userid, setUser, setPosts);
@@ -71,23 +71,15 @@ const Profile = () => {
           </div>
         </section>
       </header>
-      <div className="profile-posts-container">
-        {false &&
-          [].map((el) => (
-            <div key={el[0]} className="profile-posts-columns">
-              {el.map((inEl) => (
-                <div key={inEl} className="profile-posts-row">
-                  {
-                    <img
-                      className="profile-posts"
-                      src={"imgUrl"}
-                      alt="post by katy"
-                    />
-                  }
-                </div>
-              ))}
-            </div>
-          ))}
+      <div id="photos" style={{ margin: "80px 20px" }}>
+        {posts.map((postEl) => (
+          <img
+            src={postEl.postUrl}
+            alt={postEl.caption}
+            key={postEl._id}
+            className="abcd"
+          />
+        ))}
       </div>
     </div>
   ) : (
@@ -96,3 +88,21 @@ const Profile = () => {
 };
 
 export default Profile;
+// <div className="profile-posts-container">
+//   {posts.length &&
+//     posts?.map((el) => (
+//       <div key={el[0]} className="profile-posts-columns">
+//         {el.map((inEl) => (
+//           <div key={inEl} className="profile-posts-row">
+//             {
+//               <img
+//                 className="profile-posts"
+//                 src={"imgUrl"}
+//                 alt={"post by" + name}
+//               />
+//             }
+//           </div>
+//         ))}
+//       </div>
+//     ))}
+// </div>;

@@ -8,6 +8,7 @@ import "../styles/auth.css";
 import "../styles/createpost.css";
 import "../styles/post.css";
 import "../styles/profile.css";
+import "../styles/profile-grid.css";
 import "../styles/utils.css";
 function App() {
   return (

@@ -13,8 +13,11 @@ const CreatePost = () => {
 
   const handleCreatePost = async (postUrl) => {
     if (postUrl && caption) {
+      console.log("if condition");
       const post = await createPost(caption, postUrl);
+
       if (post) {
+        console.log("post created", post);
         history.push("/");
       }
     }
@@ -29,6 +32,7 @@ const CreatePost = () => {
         data.append("upload_preset", "hook-up");
         data.append("cloud_name", "hookupcloudddddddddddd");
         let resData = await uploadToCloud(data);
+        console.log(resData);
         if (resData) {
           handleCreatePost(resData.url);
         } else {
@@ -46,6 +50,7 @@ const CreatePost = () => {
         <label
           htmlFor="caption"
           className={`${!caption ? "dn" : ""} auth-label`}
+          style={{ paddingTop: "5px" }}
         >
           Caption
         </label>
@@ -61,9 +66,11 @@ const CreatePost = () => {
         />
       </div>
       <div className="create-post">
-        <label htmlFor="create" className="upload">
-          Upload
-        </label>
+        {status !== "loading" && (
+          <label htmlFor="create" className="upload">
+            Upload
+          </label>
+        )}
         <input
           type="file"
           id="create"
@@ -72,7 +79,7 @@ const CreatePost = () => {
           ref={ipRef}
           accept="image/*"
         />
-        {image && (
+        {image && status !== "loading" && (
           <div className="clear-img-box">
             <button className="clear-img" onClick={clearImage}>
               X

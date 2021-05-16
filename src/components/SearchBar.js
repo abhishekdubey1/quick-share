@@ -41,20 +41,21 @@ const SearchBar = ({ className }) => {
   const [users, setUsers] = useState([]);
   // const [state, setState] = useState(false);
   const getUsers = useCallback(async () => {
-    setStatus("requesting");
-    console.log("getting users");
-    const response = await axios(`${apiEndPoint}/allusers/${input}`, {
-      ...headers,
-    });
-    // const usersArr = response.data
-    //   .map((user) => ({ name: user?.name, id: user._id, dpUrl: user.dpUrl }))
-    //   .filter((user) => user.name.includes(input));
-    // .map((user) => user?.name)
-    //
-    if (response.data) {
+    try {
+      setStatus("requesting");
+      console.log("getting users");
+      const response = await axios(`${apiEndPoint}/allusers/${input}`, {
+        ...headers,
+      });
+      // const usersArr = response.data
+      //   .map((user) => ({ name: user?.name, id: user._id, dpUrl: user.dpUrl }))
+      //   .filter((user) => user.name.includes(input));
+      // .map((user) => user?.name)
+      //
       setUsers(response.data);
       setStatus("accepted");
-    } else {
+    } catch (error) {
+      console.log({ error });
       setStatus("rejected");
     }
   }, [input]);
