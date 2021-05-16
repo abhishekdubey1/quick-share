@@ -1,4 +1,10 @@
-import { useState, useContext, useLayoutEffect } from "react";
+import {
+  useState,
+  useContext,
+  useLayoutEffect,
+  useEffect,
+  useCallback,
+} from "react";
 import { useHistory } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import { useMount, useTitle } from "../utils/customHooks";
@@ -22,7 +28,7 @@ const Home = () => {
   const isMounted = useMount();
   useTitle("Home - Instagram");
 
-  const handleFetchPosts = async () => {
+  const handleFetchPosts = useCallback(async () => {
     try {
       if (isMounted) {
         setAppState({ status: "loading", data: [] });
@@ -36,7 +42,7 @@ const Home = () => {
         setAppState({ status: "rejected", error });
       }
     }
-  };
+  }, [isMounted]);
   const likeFunction = (postData) => {
     const newData = data.map((post) => {
       if (postData.id === post.id) {
@@ -46,6 +52,10 @@ const Home = () => {
     });
     setAppState({ status: "accepted", data: newData });
   };
+  useEffect(() => {
+    handleFetchPosts();
+    return () => {};
+  }, [handleFetchPosts]);
   return (
     <div className="home">
       <br />

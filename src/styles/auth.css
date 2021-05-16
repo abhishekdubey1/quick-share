@@ -41,6 +41,7 @@
   font-size: 1.3rem;
   color: #484d60;
   border: 1px solid #8080805c;
+  margin-bottom: 10px;
 }
 .show-pwd {
   position: absolute;

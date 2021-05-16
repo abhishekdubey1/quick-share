@@ -19,7 +19,7 @@ const Profile = () => {
   }, [userid]);
   let { state } = useContext(UserContext);
   let { dpUrl, name, email, followers, following, postsCount } = user;
-  let isLoaded = user.dpUrl && posts.length > 0;
+  let isLoaded = user.dpUrl;
   let isFollowed = followers?.includes(state._id);
   const handleFollow = async () => {
     if (userid) {

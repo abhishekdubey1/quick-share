@@ -3,12 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import { useOnlineStatus, useWindowSize } from "../utils/customHooks";
 import SearchBar from "./SearchBar";
-import {
-  CreatePostIcon,
-  FollowersPostIcon,
-  LogoutIcon,
-  ProfileIcon,
-} from "./Svg";
+import { CreatePostIcon, ExploreBtn, LogoutIcon, ProfileIcon } from "./Svg";
 const NavBar = () => {
   // const searchModal = useRef(null);
   // const [search, setSearch] = useState("");
@@ -28,7 +23,7 @@ const NavBar = () => {
       <div className="nav-container">
         <nav className="nav">
           <div className="logo">
-            <Link to="/">
+            <a href="/">
               {width > 600 && (
                 <img
                   src="https://www.instagram.com/static/images/web/mobile_nav_type_logo-2x.png/1b47f9d0e595.png"
@@ -46,13 +41,13 @@ const NavBar = () => {
                   </div>
                 </div>
               )}
-            </Link>
+            </a>
           </div>
           <SearchBar className={`${width < 600 ? "dn" : ""}`} />
           <div className="nav-links">
             <Link to="/myfollowingpost">
               <div>
-                <FollowersPostIcon />
+                <ExploreBtn />
               </div>
             </Link>
             <Link to="/create">
