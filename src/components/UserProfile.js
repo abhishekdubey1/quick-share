@@ -12,7 +12,7 @@ let initialState = {
 };
 const Profile = () => {
   const [user, setUser] = useState(initialState);
-  const [posts, setPosts] = useState([]);
+  const [, setPosts] = useState([]);
   const { userid } = useParams();
   useEffect(() => {
     fetchUser(userid, setUser, setPosts);

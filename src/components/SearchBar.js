@@ -3,14 +3,6 @@ import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { apiEndPoint } from "../utils/helper";
 import { SpinLoader } from "./Svg";
-function resolveAfter2Seconds() {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve("resolved");
-    }, 2000);
-  });
-}
-
 const headers = {
   headers: {
     Authorization: "Bearer " + localStorage.getItem("jwt"),

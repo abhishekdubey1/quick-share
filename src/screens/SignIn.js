@@ -73,7 +73,7 @@ const SignIn = () => {
             Password
           </label>
           <input
-            type={`${showPassword ? "text" : "password"}`}
+            type={showPassword ? "text" : "password"}
             required
             id="password"
             className={`${ipClass("password ", values.password)}`}
@@ -88,7 +88,7 @@ const SignIn = () => {
               className="show-pwd"
               onClick={() => setShowPassword((s) => !s)}
             >
-              Show
+              {showPassword ? "Hide" : "Show"}
             </div>
           )}
         </div>
