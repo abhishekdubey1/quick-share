@@ -49,7 +49,7 @@ export const Routing = () => {
         <SinglePost userId={_id || ""} />
       </Route>
       <Route path="/myfollowingpost">
-        <Home />
+        <FollowingsPost />
       </Route>
       <Route path="/following-users">
         <FollowingsPost />

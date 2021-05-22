@@ -87,13 +87,12 @@ export const deletePost = async (postid) => {
     // return error;
   }
 };
-export const fetchSubPosts = async (setter) => {
+export const fetchSubPosts = async () => {
   try {
-    const { data } = await axios(`${apiEndPoint}/getsubpost`, {
+    const response = await axios(`${apiEndPoint}/getsubpost`, {
       ...headers,
     });
-    setter(data.posts);
-    return data.posts;
+    return response;
   } catch (error) {
     console.log(error);
     alert("Oops! there was an error");

@@ -18,10 +18,10 @@
   margin: 10px 15px -20px 20px;
 }
 .profile-picture > img {
-  width: 60%;
+  width: 130px;
   margin: 10px;
-  height: auto;
-  max-width: 130px;
+  height: 130px;
+  border-radius: 50%;
 }
 .profile-details {
   display: flex;
