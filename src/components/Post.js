@@ -11,9 +11,8 @@ function Post(props) {
     if (!isLiked) {
       setStatus("loading");
       const response = await likePost(postId);
-      if (response.status === 200) {
-        likeFunction(response.data);
-      }
+      console.log(response.data);
+      likeFunction(response.data);
       setStatus("accepted");
     }
   };
@@ -61,9 +60,13 @@ function Post(props) {
         </div>
       </Link>
       <div className="post-features">
-        {!isLiked && isAccepted() && <LikeBtn handleLike={handleLike} />}
-        {isLiked && isAccepted() && <UnLikeBtn handleLike={handleUnlike} />}
-        {status === "loading" && <div className="spin-loader" />}
+        {!isOwnPost && (
+          <>
+            {!isLiked && isAccepted() && <LikeBtn handleLike={handleLike} />}
+            {isLiked && isAccepted() && <UnLikeBtn handleLike={handleUnlike} />}
+            {status === "loading" && <div className="spin-loader" />}
+          </>
+        )}
         <Link to={`/post/${postId}`}>
           <CommentBtn />
         </Link>

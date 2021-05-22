@@ -8,6 +8,80 @@ const headers = {
     Authorization: "Bearer " + localStorage.getItem("jwt"),
   },
 };
+const SearchBar = ({ className }) => {
+  const [input, setInput] = useState("");
+  const [status, setStatus] = useState("idle"); //idle, requesting, no-result, rejected
+  const [users, setUsers] = useState([]);
+  // const [state, setState] = useState(false);
+  const getUsers = useCallback(async () => {
+    try {
+      setStatus("requesting");
+      console.log("getting users");
+      const response = await axios(`${apiEndPoint}/allusers/${input}`, {
+        ...headers,
+      });
+      setUsers(response.data);
+      setStatus("accepted");
+    } catch (error) {
+      console.log({ error });
+      setStatus("rejected");
+    }
+  }, [input]);
+  useEffect(() => {
+    if (input && status !== "requesting") {
+      getUsers();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [getUsers, input]);
+
+  return (
+    <div
+      className={`${className} ${input.trim() && users.length ? `mt-45` : ""}`}
+    >
+      <label className="search-input-wrap " htmlFor="search-bar">
+        <h1 id="search-title" className="screen-reader-text">
+          Search
+        </h1>
+        <svg viewBox="0 0 56.7 56.7" className="icon-mag">
+          <path d="M42.8 7.3C33-2.4 17.1-2.4 7.3 7.3c-9.8 9.8-9.8 25.7 0 35.5 8.7 8.7 22.2 9.7 32 2.9l9.6 9.6c1.8 1.8 4.7 1.8 6.4 0 1.8-1.8 1.8-4.7 0-6.4l-9.6-9.6c6.8-9.8 5.8-23.3-2.9-32zm-6.2 29.3c-6.4 6.4-16.7 6.4-23.1 0s-6.4-16.7 0-23.1c6.4-6.4 16.7-6.4 23.1 0 6.4 6.4 6.4 16.8 0 23.1z"></path>
+        </svg>
+        <input
+          autoComplete="off"
+          className="search-input"
+          placeholder="Search Users"
+          type="search"
+          id="search-bar"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+        />
+      </label>
+      {input && users.length > 0 && (
+        <ul
+          className="search-users-li"
+          style={className ? { top: "30px" } : {}}
+        >
+          {(status === "idle" || status === "accepted") &&
+            users?.map((user) => (
+              <Link to={`/profile/${user._id}`} key={user._id}>
+                <li className="search-user-item" key={user.id}>
+                  <img src={user.dpUrl} alt="" className="search-user-img" />
+                  {user.name}
+                </li>
+              </Link>
+            ))}
+          {status === "requesting" && <SpinLoader />}
+          {status === "rejected" && (
+            <p role="alert" onClick={getUsers}>
+              Error try again
+            </p>
+          )}
+        </ul>
+      )}
+    </div>
+  );
+};
+export default SearchBar;
+//
 /*
     {
       name: "Simba",
@@ -35,76 +109,3 @@ const headers = {
     },
 
 */
-const SearchBar = ({ className }) => {
-  const [input, setInput] = useState("");
-  const [status, setStatus] = useState("idle"); //idle, requesting, no-result, rejected
-  const [users, setUsers] = useState([]);
-  // const [state, setState] = useState(false);
-  const getUsers = useCallback(async () => {
-    try {
-      setStatus("requesting");
-      console.log("getting users");
-      const response = await axios(`${apiEndPoint}/allusers/${input}`, {
-        ...headers,
-      });
-      // const usersArr = response.data
-      //   .map((user) => ({ name: user?.name, id: user._id, dpUrl: user.dpUrl }))
-      //   .filter((user) => user.name.includes(input));
-      // .map((user) => user?.name)
-      //
-      setUsers(response.data);
-      setStatus("accepted");
-    } catch (error) {
-      console.log({ error });
-      setStatus("rejected");
-    }
-  }, [input]);
-  useEffect(() => {
-    if (input && status !== "requesting") {
-      getUsers();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getUsers, input]);
-
-  return (
-    <div className={input.trim() && users.length ? `mt-45` : ""}>
-      <label className={"search-input-wrap " + className} htmlFor="search-bar">
-        <h1 id="search-title" className="screen-reader-text">
-          Search
-        </h1>
-        <svg viewBox="0 0 56.7 56.7" className="icon-mag">
-          <path d="M42.8 7.3C33-2.4 17.1-2.4 7.3 7.3c-9.8 9.8-9.8 25.7 0 35.5 8.7 8.7 22.2 9.7 32 2.9l9.6 9.6c1.8 1.8 4.7 1.8 6.4 0 1.8-1.8 1.8-4.7 0-6.4l-9.6-9.6c6.8-9.8 5.8-23.3-2.9-32zm-6.2 29.3c-6.4 6.4-16.7 6.4-23.1 0s-6.4-16.7 0-23.1c6.4-6.4 16.7-6.4 23.1 0 6.4 6.4 6.4 16.8 0 23.1z"></path>
-        </svg>
-        <input
-          autoComplete="off"
-          className="search-input"
-          placeholder="Search Users"
-          type="search"
-          id="search-bar"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-        />
-      </label>
-      {input && (
-        <ul className="search-users-li">
-          {(status === "idle" || status === "accepted") &&
-            users?.map((user) => (
-              <Link to={`/profile/${user.id}`} key={user.id}>
-                <li className="search-user-item" key={user.id}>
-                  <img src={user.dpUrl} alt="" className="search-user-img" />
-                  {user.name}
-                </li>
-              </Link>
-            ))}
-          {status === "requesting" && <SpinLoader />}
-          {status === "rejected" && (
-            <p role="alert" onClick={getUsers}>
-              Error try again
-            </p>
-          )}
-        </ul>
-      )}
-    </div>
-  );
-};
-export default SearchBar;

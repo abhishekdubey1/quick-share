@@ -9,11 +9,14 @@
   justify-content: center;
   align-items: center;
 }
-.mt-45 {
-  /* margin-top: 45px; */
+.top-55 {
+  margin-top: 55px;
 }
 .ps-rl {
   position: relative;
+}
+.ps-ab {
+  position: absolute;
 }
 .fs-sm {
   font-size: 13px;

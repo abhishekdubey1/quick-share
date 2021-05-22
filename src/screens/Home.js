@@ -45,8 +45,9 @@ const Home = () => {
   }, [isMounted]);
   const likeFunction = (postData) => {
     const newData = data.map((post) => {
-      if (postData.id === post.id) {
-        return { ...post, ...postData };
+      if (postData._id === post._id) {
+        console.log("postData");
+        return postData;
       }
       return post;
     });

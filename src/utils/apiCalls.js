@@ -6,14 +6,12 @@ const headers = {
   },
 };
 export const likePost = async (postId) => {
-  console.log("liking in process");
   try {
     const response = await axios.put(
       `${apiEndPoint}/like`,
       { postId },
       { ...headers }
     );
-    console.log(response.data);
     return response;
   } catch (error) {
     alert("There was some error");
@@ -22,14 +20,12 @@ export const likePost = async (postId) => {
   }
 };
 export const unlikePost = async (postId) => {
-  console.log("unliking in process");
   try {
     const response = await axios.put(
       `${apiEndPoint}/unlike`,
       { postId },
       { ...headers }
     );
-    console.log(response.data);
     return response;
   } catch (error) {
     alert("There was some error");
@@ -39,9 +35,7 @@ export const unlikePost = async (postId) => {
 };
 export const fetchPosts = async () => {
   try {
-    console.log("making request");
     const response = await axios(`${apiEndPoint}/allposts`, { ...headers });
-    console.log("res from server");
     return response;
   } catch (error) {
     alert("There was some error");
