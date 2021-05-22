@@ -1,3 +1,11 @@
+.not-found > b {
+  font-size: 1.9rem;
+}
+.not-found {
+  font-size: 1.7rem;
+  text-align: center;
+}
+
 .b {
   font-weight: 500;
 }

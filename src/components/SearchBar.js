@@ -12,6 +12,7 @@ const SearchBar = ({ className }) => {
   const [input, setInput] = useState("");
   const [status, setStatus] = useState("idle"); //idle, requesting, no-result, rejected
   const [users, setUsers] = useState([]);
+  const [isFocused, setIsFocused] = useState(false);
   // const [state, setState] = useState(false);
   const getUsers = useCallback(async () => {
     try {
@@ -33,6 +34,7 @@ const SearchBar = ({ className }) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getUsers, input]);
+  useEffect(() => !isFocused && setInput(""), [isFocused]);
 
   return (
     <div
@@ -53,6 +55,8 @@ const SearchBar = ({ className }) => {
           id="search-bar"
           value={input}
           onChange={(e) => setInput(e.target.value)}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
         />
       </label>
       {input && users.length > 0 && (
@@ -61,7 +65,7 @@ const SearchBar = ({ className }) => {
           style={className ? { top: "30px" } : {}}
         >
           {(status === "idle" || status === "accepted") &&
-            users?.map((user) => (
+            users.slice(0, 9)?.map((user) => (
               <Link to={`/profile/${user._id}`} key={user._id}>
                 <li className="search-user-item" key={user.id}>
                   <img src={user.dpUrl} alt="" className="search-user-img" />

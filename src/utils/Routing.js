@@ -9,6 +9,8 @@ import UserProfile from "../components/UserProfile";
 import FollowingsPost from "../screens/FollowingsPost";
 import { UserContext } from "../context/UserContext";
 import SinglePost from "../components/SinglePost";
+import NotFound from "../screens/404-page";
+import Inbox from "../components/Inbox";
 
 export const Routing = () => {
   const history = useHistory();
@@ -28,7 +30,9 @@ export const Routing = () => {
   return (
     <Switch>
       <Route exact path="/">
+        {/* <SideBarWrap> */}
         <Home />
+        {/* </SideBarWrap> */}
       </Route>
       <Route path="/signin">
         <Signin />
@@ -54,6 +58,9 @@ export const Routing = () => {
       <Route path="/following-users">
         <FollowingsPost />
       </Route>
+      <Route path="/inbox">
+        <Inbox />
+      </Route>
       {/* <Route exact path="/reset">
         <Reset />
       </Route>
@@ -61,7 +68,7 @@ export const Routing = () => {
         <NewPassword />
       </Route> */}
       <Route>
-        <h1>404 Page Not Found</h1>
+        <NotFound />
       </Route>
     </Switch>
   );
