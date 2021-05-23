@@ -47,9 +47,11 @@ const Profile = () => {
           <div className="profile-main">
             <h2 className="profile-username">{email}</h2>
             <div className="profile-follow-btn">
-              <button className="" onClick={handleFollow}>
-                {!isFollowed ? "Follow" : "UnFollow"}
-              </button>
+              {false && (
+                <button className="" onClick={handleFollow}>
+                  {!isFollowed ? "Follow" : "UnFollow"}
+                </button>
+              )}
             </div>
           </div>
           <ul className="profile-stats">
