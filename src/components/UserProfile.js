@@ -26,17 +26,16 @@ const Profile = () => {
       if (isFollowed) {
         const data = await unFollow(userid);
         console.log(data);
-        console.log({ ...user, followers });
       } else {
         const data = await follow(userid);
         console.log(data);
-        console.log({ ...user, followers });
+        // console.log({ ...user, followers });
         // setUser((u) => ({ ...u, ...data }));
       }
     }
   };
   useEffect(() => {
-    console.log(user);
+    // console.log(user);
   }, [user]);
   return isLoaded ? (
     <div className="profile">
@@ -48,11 +47,9 @@ const Profile = () => {
           <div className="profile-main">
             <h2 className="profile-username">{email}</h2>
             <div className="profile-follow-btn">
-              {false && (
-                <button className="" onClick={handleFollow}>
-                  {!isFollowed ? "Follow" : "UnFollow"}
-                </button>
-              )}{" "}
+              <button className="" onClick={handleFollow}>
+                {!isFollowed ? "Follow" : "UnFollow"}
+              </button>
             </div>
           </div>
           <ul className="profile-stats">

@@ -101,13 +101,12 @@ export const fetchSubPosts = async () => {
 };
 export const follow = async (followId) => {
   try {
-    const { data } = axios.put(
+    const response = axios.put(
       `${apiEndPoint}/follow`,
       { followId },
       { ...headers }
     );
-    console.log({ data });
-    return data;
+    return response;
     // setData(newData);
   } catch (error) {
     alert("There was some error");
@@ -115,15 +114,14 @@ export const follow = async (followId) => {
     // return error;
   }
 };
-export const unFollow = async (followId) => {
+export const unFollow = async (unfollowId) => {
   try {
-    const { data } = await axios.put(
+    const response = await axios.put(
       `${apiEndPoint}/unfollow`,
-      { followId },
+      { unfollowId },
       { ...headers }
     );
-    console.log({ data });
-    return data;
+    return response;
     // setData(newData);
   } catch (error) {
     alert("There was some error");
