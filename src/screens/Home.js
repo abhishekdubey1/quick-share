@@ -54,9 +54,11 @@ const Home = () => {
     setAppState({ status: "accepted", data: newData });
   };
   useEffect(() => {
-    handleFetchPosts();
+    if (state) {
+      handleFetchPosts();
+    }
     return () => {};
-  }, [handleFetchPosts]);
+  }, [handleFetchPosts, state]);
   return (
     <div className="home">
       <br />
