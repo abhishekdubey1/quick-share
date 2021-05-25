@@ -1,7 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { UserContext } from "../context/UserContext";
-import { fetchUser, follow, unFollow } from "../utils/apiCalls";
+import { fetchUser } from "../utils/apiCalls";
+import FollowBtn from "./FollowBtn";
 let initialState = {
   dpUrl: null,
   name: null,
@@ -21,22 +22,26 @@ const Profile = () => {
   let { dpUrl, name, email, followers, following, postsCount } = user;
   let isLoaded = user.dpUrl;
   let isFollowed = followers?.includes(state._id);
-  const handleFollow = async () => {
-    if (userid) {
-      if (isFollowed) {
-        const data = await unFollow(userid);
-        console.log(data);
-      } else {
-        const data = await follow(userid);
-        console.log(data);
-        // console.log({ ...user, followers });
-        // setUser((u) => ({ ...u, ...data }));
-      }
+
+  /*
+   
+      "followedUser": {
+        "dpUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs7kc4LWYMTgCvPRNPCDK99Vf0O1vggwWsgA&usqp=CAU",
+        "followers": [
+            "609ea882b038f400292b9ee0"
+        ],
+        "following": [
+            "6093b5b628bce2002328eed8"
+        ],
+        "_id": "6093bb0528bce2002328eed9",
+        "name": "Amarjit",
+        "email": "abc@gmail.com",
+        "password": "$2b$12$nhZ52v64OP9FdPeYXXZ0B.8lVO6L7vZTqQzyywvcBt1KnxzT7//pu",
+        "__v": 0
     }
-  };
-  useEffect(() => {
-    // console.log(user);
-  }, [user]);
+
+   */
+
   return isLoaded ? (
     <div className="profile">
       <header className="profile-info">
@@ -46,13 +51,12 @@ const Profile = () => {
         <section className="profile-details">
           <div className="profile-main">
             <h2 className="profile-username">{email}</h2>
-            <div className="profile-follow-btn">
-              {false && (
-                <button className="" onClick={handleFollow}>
-                  {!isFollowed ? "Follow" : "UnFollow"}
-                </button>
-              )}
-            </div>
+            <FollowBtn
+              userid={userid}
+              isFollowed={isFollowed}
+              postsCount={postsCount}
+              setUser={setUser}
+            />
           </div>
           <ul className="profile-stats">
             <li>
@@ -82,26 +86,8 @@ const Profile = () => {
       </div>
     </div>
   ) : (
-    <h3 className="loading">Loading</h3>
+    <h3 className="loading fs-lg">Loading</h3>
   );
 };
 
 export default Profile;
-// <div className="profile-posts-container">
-//   {posts.length &&
-//     posts?.map((el) => (
-//       <div key={el[0]} className="profile-posts-columns">
-//         {el.map((inEl) => (
-//           <div key={inEl} className="profile-posts-row">
-//             {
-//               <img
-//                 className="profile-posts"
-//                 src={"imgUrl"}
-//                 alt={"post by" + name}
-//               />
-//             }
-//           </div>
-//         ))}
-//       </div>
-//     ))}
-// </div>;
