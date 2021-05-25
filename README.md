@@ -32,6 +32,8 @@ Those are:</h2>
 
 - Option to Like and Comment on Post
 
+- follow and unfollow
+
 <h2>About Code:</h2>
 
 - Considered Readability
@@ -53,3 +55,23 @@ Those are:</h2>
 - styles -> styles for all screens and components
 
 - utils -> has files like apiCalls, customHooks, helpers, Routing
+
+<h2>Future scope features</h2>
+
+- Updating user on follow and unfollow (FE)
+
+- Delete Post (FE)
+
+- Edit Post's caption (FE, BE)
+
+- Edit Profile (FE, BE)
+
+- Edit Comment (BE, FE)
+
+<h2>Future scope UI and UX</h2>
+
+- Photo grid of posts of users
+
+- signup page to be divided in two parts. 1) Auth 2) DP Upload
+
+- Search box UI and UX
