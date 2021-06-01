@@ -1,14 +1,18 @@
 import axios from "axios";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { apiEndPoint } from "../utils/helper";
 import { SpinLoader } from "./Svg";
+import { UserContext } from "../context/UserContext";
+
 const headers = {
 	headers: {
 		Authorization: "Bearer " + localStorage.getItem("jwt"),
 	},
 };
 const SearchBar = ({ className }) => {
+	let { state } = useContext(UserContext);
+	const isOwnProfile = (id) => id === state._id;
 	const [input, setInput] = useState("");
 	const [status, setStatus] = useState("idle"); //idle, requesting, no-result, rejected
 	const [users, setUsers] = useState([]);
@@ -55,7 +59,9 @@ const SearchBar = ({ className }) => {
 
 	return (
 		<div
-			className={`${className} ${input.trim() && users.length ? `mt-45` : ""}`}
+			className={`  ${className} ${
+				input.trim() && users.length ? `mt-45` : ""
+			}`}
 		>
 			<label className="search-input-wrap " htmlFor="search-bar">
 				<h1 id="search-title" className="screen-reader-text">
@@ -83,7 +89,12 @@ const SearchBar = ({ className }) => {
 				>
 					{(status === "idle" || status === "accepted") &&
 						users.slice(0, 9)?.map((user) => (
-							<Link to={`/profile/${user._id}`} key={user._id}>
+							<Link
+								to={
+									isOwnProfile(user._id) ? "/profile" : `/profile/${user._id}`
+								}
+								key={user._id}
+							>
 								<li className="search-user-item" key={user.id}>
 									<img src={user.dpUrl} alt="" className="search-user-img" />
 									{user.name}
@@ -97,6 +108,9 @@ const SearchBar = ({ className }) => {
 						</p>
 					)}
 				</ul>
+			)}
+			{input && users.length === 0 && status === "accepted" && (
+				<p className="no-users-found">Oops! no user found 🙁</p>
 			)}
 		</div>
 	);

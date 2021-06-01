@@ -59,8 +59,7 @@
 
 .post-img {
 	width: 100%;
-	height: auto;
-	max-height: 60rem;
+	height: 35rem;
 	object-fit: contain;
 }
 .post-options {

@@ -145,3 +145,10 @@ input[type="search"] {
 	height: auto;
 	margin: 0px 12px 0px 0px;
 }
+.no-users-found {
+	font-size: 1.6rem;
+	position: absolute;
+	background-color: #fff;
+	bottom: -18px;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.089);
+}
