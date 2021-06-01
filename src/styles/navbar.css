@@ -1,50 +1,54 @@
 .nav-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 5.4rem;
-  border-bottom: 1px solid rgba(219, 219, 219, 1);
-  position: fixed;
-  top: 0;
-  transition: height 0.2s ease-in-out;
-  width: 100%;
-  z-index: 3;
-  background-color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 5.4rem;
+	border-bottom: 1px solid rgba(219, 219, 219, 1);
+	position: fixed;
+	top: 0;
+	transition: height 0.2s ease-in-out;
+	width: 100%;
+	z-index: 3;
+	background-color: white;
 }
 .nav {
-  height: 5.4rem;
-  padding: 0 2rem;
-  transition: height 0.2s ease-in-out;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
+	height: 5.4rem;
+	padding: 0 2rem;
+	transition: height 0.2s ease-in-out;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
 }
 
 .logo {
-  width: 10rem;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+	width: 10rem;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 .logo-img {
-  width: 10rem;
-  max-height: 100%;
-  max-width: 100%;
-  -o-object-fit: contain;
-  object-fit: contain;
-  margin-top: 7px;
+	width: 10rem;
+	max-height: 100%;
+	max-width: 100%;
+	-o-object-fit: contain;
+	object-fit: contain;
+	margin-top: 7px;
 }
 .nav-links {
-  display: flex;
-  justify-content: space-between;
-  width: 17.5rem;
+	display: flex;
+	justify-content: space-between;
+	width: 17.5rem;
+	align-items: center;
+}
+.explore {
+	margin-top: 3px;
 }
 .nav-logo {
-  padding: 15px;
-  background: white;
-  height: 60px;
+	padding: 15px;
+	background: white;
+	height: 60px;
 }
 /**
 *
@@ -60,84 +64,84 @@
 *
 **/
 .search-input-wrap {
-  position: relative;
-  display: block;
+	position: relative;
+	display: block;
 }
 .screen-reader-text {
-  position: absolute;
-  top: -9999px;
-  left: -9999px;
+	position: absolute;
+	top: -9999px;
+	left: -9999px;
 }
 h1,
 .h1 {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  line-height: 1.1;
-  font-size: 3rem;
-  margin: 0 0 10px 0;
-  font-weight: normal;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	line-height: 1.1;
+	font-size: 3rem;
+	margin: 0 0 10px 0;
+	font-weight: normal;
 }
 .search-form-header .search-input-wrap .icon-mag {
-  fill: #868ca0;
+	fill: #868ca0;
 }
 .search-input-wrap .icon-mag {
-  position: absolute;
-  top: 0;
-  left: 0.6em;
-  bottom: 0;
-  margin: auto auto auto 0;
-  width: 1em;
-  height: 1em;
-  z-index: 1;
-  fill: #717790;
+	position: absolute;
+	top: 0;
+	left: 0.6em;
+	bottom: 0;
+	margin: auto auto auto 0;
+	width: 1em;
+	height: 1em;
+	z-index: 1;
+	fill: #717790;
 }
 .search-form-header .search-input {
-  font-weight: bold;
-  background: #252830;
-  color: white;
+	font-weight: bold;
+	background: #252830;
+	color: white;
 }
 .search-input-wrap .search-input {
-  width: 100%;
-  margin: 0;
-  text-indent: 2em;
-  border: 0;
-  border-radius: 4px;
-  font: inherit;
-  line-height: 28px;
-  font-size: 16px;
+	width: 100%;
+	margin: 0;
+	text-indent: 2em;
+	border: 0;
+	border-radius: 4px;
+	font: inherit;
+	line-height: 28px;
+	font-size: 16px;
 }
 input[type="search"] {
-  -webkit-appearance: none;
-  outline: 0;
-  font-size: 18px;
+	-webkit-appearance: none;
+	outline: 0;
+	font-size: 18px;
 }
 /*  */
 .isOnline {
-  height: 1rem;
-  width: 1rem;
-  margin-left: 1rem;
-  border-radius: 50%;
+	height: 1rem;
+	width: 1rem;
+	margin-left: 1rem;
+	border-radius: 50%;
 }
 .nav-icon {
-  width: 2.5rem;
+	width: 2.5rem;
 }
 /* https://www.instagram.com/static/images/web/mobile_nav_type_logo-2x.png/1b47f9d0e595.png */
 
 .search-users-li {
-  background-color: white;
-  list-style: none;
-  font-size: 15px;
-  position: absolute;
-  top: 55px;
-  width: 250px;
-  border: 1px solid gray;
-  border-top: 1px solid transparent;
+	background-color: white;
+	list-style: none;
+	font-size: 15px;
+	position: absolute;
+	top: 55px;
+	width: 250px;
+	border: 1px solid gray;
+	border-top: 1px solid transparent;
 }
 .search-user-item {
-  padding: 10px;
+	padding: 10px;
 }
 .search-user-img {
-  width: 20px;
-  height: auto;
-  margin: 0px 12px 0px 0px;
+	width: 20px;
+	height: auto;
+	margin: 0px 12px 0px 0px;
 }

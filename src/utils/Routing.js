@@ -26,18 +26,21 @@ export const Routing = () => {
 	}, [dispatch, history]);
 	const { _id } = state ||
 		JSON.parse(localStorage.getItem("user")) || { _id: 1 };
+	console.log(state);
 	if (!state) {
-		<Switch>
-			<Route path="/signin">
-				<Signin />
-			</Route>
-			<Route path="/signup">
-				<Signup />
-			</Route>
-			<Route>
-				<NotFound />
-			</Route>
-		</Switch>;
+		return (
+			<Switch>
+				<Route path="/signin">
+					<Signin />
+				</Route>
+				<Route path="/signup">
+					<Signup />
+				</Route>
+				<Route>
+					<NotFound />
+				</Route>
+			</Switch>
+		);
 	}
 	if (state) {
 		return (
