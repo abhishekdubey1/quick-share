@@ -13,63 +13,71 @@ import NotFound from "../screens/404-page";
 import Inbox from "../components/Inbox";
 
 export const Routing = () => {
-  const history = useHistory();
-  const { state, dispatch } = useContext(UserContext);
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    if (user) {
-      dispatch({ type: "USER", payload: user });
-    } else {
-      if (!history.location.pathname.startsWith("/reset"))
-        history.push("/signin");
-    }
-  }, [dispatch, history]);
-  const { _id } = state ||
-    JSON.parse(localStorage.getItem("user")) || { _id: 1 };
-
-  return (
-    <Switch>
-      <Route exact path="/">
-        {/* <SideBarWrap> */}
-        <Home />
-        {/* </SideBarWrap> */}
-      </Route>
-      <Route path="/signin">
-        <Signin />
-      </Route>
-      <Route path="/signup">
-        <Signup />
-      </Route>
-      <Route exact path="/profile">
-        <Profile />
-      </Route>
-      <Route path="/create">
-        <CreatePost />
-      </Route>
-      <Route path="/profile/:userid">
-        <UserProfile />
-      </Route>
-      <Route path="/post/:postIdParam">
-        <SinglePost userId={_id || ""} />
-      </Route>
-      <Route path="/myfollowingpost">
-        <FollowingsPost />
-      </Route>
-      <Route path="/following-users">
-        <FollowingsPost />
-      </Route>
-      <Route path="/inbox">
-        <Inbox />
-      </Route>
-      {/* <Route exact path="/reset">
+	const history = useHistory();
+	const { state, dispatch } = useContext(UserContext);
+	useEffect(() => {
+		const user = JSON.parse(localStorage.getItem("user"));
+		if (user) {
+			dispatch({ type: "USER", payload: user });
+		} else {
+			if (!history.location.pathname.startsWith("/reset"))
+				history.push("/signin");
+		}
+	}, [dispatch, history]);
+	const { _id } = state ||
+		JSON.parse(localStorage.getItem("user")) || { _id: 1 };
+	if (!state) {
+		<Switch>
+			<Route path="/signin">
+				<Signin />
+			</Route>
+			<Route path="/signup">
+				<Signup />
+			</Route>
+			<Route>
+				<NotFound />
+			</Route>
+		</Switch>;
+	}
+	if (state) {
+		return (
+			<Switch>
+				<Route exact path="/">
+					{/* <SideBarWrap> */}
+					<Home />
+					{/* </SideBarWrap> */}
+				</Route>
+				<Route exact path="/profile">
+					<Profile />
+				</Route>
+				<Route path="/create">
+					<CreatePost />
+				</Route>
+				<Route path="/profile/:userid">
+					<UserProfile />
+				</Route>
+				<Route path="/post/:postIdParam">
+					<SinglePost userId={_id || ""} />
+				</Route>
+				<Route path="/myfollowingpost">
+					<FollowingsPost />
+				</Route>
+				<Route path="/following-users">
+					<FollowingsPost />
+				</Route>
+				<Route path="/inbox">
+					<Inbox />
+				</Route>
+				<Route>
+					<NotFound />
+				</Route>
+			</Switch>
+		);
+	}
+};
+/* <Route exact path="/reset">
         <Reset />
       </Route>
       <Route path="/reset/:token">
         <NewPassword />
-      </Route> */}
-      <Route>
-        <NotFound />
-      </Route>
-    </Switch>
-  );
-};
+      </Route> */
