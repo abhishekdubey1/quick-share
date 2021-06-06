@@ -2,28 +2,56 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { UserContext } from "../context/UserContext";
 import { fetchUser } from "../utils/apiCalls";
-import FollowBtn from "./FollowBtn";
+import { Main, PhotoPosts, Picture, Stats } from "./Profile/ProfileComponents";
 let initialState = {
-  dpUrl: null,
-  name: null,
-  email: null,
-  followers: null,
-  following: null,
-  postsCount: null,
+	dpUrl: null,
+	name: null,
+	email: null,
+	followers: null,
+	following: null,
+	postsCount: null,
 };
 const Profile = () => {
-  const [user, setUser] = useState(initialState);
-  const [posts, setPosts] = useState([]);
-  const { userid } = useParams();
-  useEffect(() => {
-    fetchUser(userid, setUser, setPosts);
-  }, [userid]);
-  let { state } = useContext(UserContext);
-  let { dpUrl, name, email, followers, following, postsCount } = user;
-  let isLoaded = user.dpUrl;
-  let isFollowed = followers?.includes(state._id);
+	const [user, setUser] = useState(initialState);
+	const [posts, setPosts] = useState([]);
+	const { userid } = useParams();
+	useEffect(() => {
+		fetchUser(userid, setUser, setPosts);
+	}, [userid]);
+	let { state } = useContext(UserContext);
+	let { dpUrl, name, email, followers, following, postsCount } = user;
+	let isLoaded = user.dpUrl;
+	let isFollowed = followers?.includes(state._id);
 
-  /*
+	return isLoaded ? (
+		<div className="profile">
+			<header className="profile__head">
+				<Picture dpUrl={dpUrl} name={name} />
+				<Main
+					name={name}
+					showFollow={true}
+					showEdit={true}
+					userid={userid}
+					isFollowed={isFollowed}
+					postsCount={postsCount}
+					setUser={setUser}
+				/>
+				<h2 className="profile__email">{email}</h2>
+				<Stats
+					postsCount={postsCount}
+					followers={followers}
+					following={following}
+				/>
+			</header>
+			<PhotoPosts posts={posts} />
+		</div>
+	) : (
+		<h3 className="loading fs-lg">Loading</h3>
+	);
+};
+
+export default Profile;
+/*
    
       "followedUser": {
         "dpUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs7kc4LWYMTgCvPRNPCDK99Vf0O1vggwWsgA&usqp=CAU",
@@ -41,53 +69,3 @@ const Profile = () => {
     }
 
    */
-
-  return isLoaded ? (
-    <div className="profile">
-      <header className="profile-info">
-        <div className="profile-picture">
-          <img src={dpUrl} alt={`Display of ${name}`} />
-        </div>
-        <section className="profile-details">
-          <div className="profile-main">
-            <h2 className="profile-username">{email}</h2>
-            <FollowBtn
-              userid={userid}
-              isFollowed={isFollowed}
-              postsCount={postsCount}
-              setUser={setUser}
-            />
-          </div>
-          <ul className="profile-stats">
-            <li>
-              <b>{postsCount || 0}</b> posts
-            </li>
-            <li>
-              <b>{followers.length}</b> followers
-            </li>
-            <li>
-              <b>{following.length}</b> followings
-            </li>
-          </ul>
-          <div className="profile-head">
-            <h1 className="profile-name">{name}</h1>
-          </div>
-        </section>
-      </header>
-      <div id="photos" style={{ margin: "80px 20px" }}>
-        {posts.map((postEl) => (
-          <img
-            src={postEl.postUrl}
-            alt={postEl.caption}
-            key={postEl._id}
-            className="abcd"
-          />
-        ))}
-      </div>
-    </div>
-  ) : (
-    <h3 className="loading fs-lg">Loading</h3>
-  );
-};
-
-export default Profile;
