@@ -8,16 +8,19 @@ import { capitalize } from "../utils/helper";
 
 const Profile = () => {
 	const { state } = useContext(UserContext);
+	const [status, setStatus] = useState("idle");
 	let { dpUrl, name, email, followers, following, postsCount } =
 		state || JSON.parse(localStorage.getItem("user"));
 	const [posts, setPosts] = useState([]);
 	useTitle(`${capitalize(name)} - Instagram`);
 	const isMounted = useMount();
 	useEffect(() => {
+		setStatus("loading");
 		fetchUserPosts()
 			.then((res) => {
 				if (isMounted) {
 					setPosts(res.data);
+					setStatus("accepted");
 				}
 			})
 			.catch((err) => console.error(err));
@@ -35,7 +38,20 @@ const Profile = () => {
 					following={following}
 				/>
 			</header>
-			<PhotoPosts posts={posts || []} />
+			{(status === "accepted" || status === "idle") && (
+				<PhotoPosts posts={posts || []} />
+			)}
+			{status === "loading" && (
+				<div className="ht-50 fl-ct">
+					<div class="loader">
+						<div class="line"></div>
+						<div class="line"></div>
+						<div class="line"></div>
+						<div class="line"></div>
+						<div class="line"></div>
+					</div>
+				</div>
+			)}
 		</div>
 	);
 };

@@ -10,15 +10,16 @@ import "../styles/post.css";
 import "../styles/profile.css";
 import "../styles/profile-grid.css";
 import "../styles/utils.css";
+import "../styles/spinner.css";
 function App() {
-  return (
-    <UserProvider>
-      <BrowserRouter>
-        <NavBar />
-        <Routing />
-      </BrowserRouter>
-    </UserProvider>
-  );
+	return (
+		<UserProvider>
+			<BrowserRouter>
+				<NavBar />
+				<Routing />
+			</BrowserRouter>
+		</UserProvider>
+	);
 }
 /**
  * Need folders: helpers, hooks, lib, pages, styles, constants

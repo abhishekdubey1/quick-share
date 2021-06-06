@@ -8,21 +8,23 @@
 }
 .profile__head {
 	display: grid;
-	grid-template-columns: 4fr 6fr;
+	grid-template-columns: 3fr 6fr;
 	grid-template-rows: 2fr 2fr 1fr;
 	position: relative;
+	background-color: white;
 }
 .profile__picture {
 	width: 100px;
 	height: 100px;
 	/* border: 1px solid black; */
 	grid-row: 1 / -1;
-	margin: 15px 10px;
+	margin: 15px auto;
 }
 .profile__picture img {
 	height: 100%;
 	width: 100%;
 	object-fit: cover;
+	border-radius: 50%;
 }
 .profile__main {
 	position: relative;
@@ -69,6 +71,7 @@
 @media (max-width: 500px) {
 	.profile__head {
 		height: 125px;
+		grid-template-columns: 4fr 6fr;
 	}
 	.profile__main {
 		padding-top: 15px;
