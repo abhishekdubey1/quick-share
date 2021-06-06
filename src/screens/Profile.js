@@ -43,12 +43,12 @@ const Profile = () => {
 			)}
 			{status === "loading" && (
 				<div className="ht-50 fl-ct">
-					<div class="loader">
-						<div class="line"></div>
-						<div class="line"></div>
-						<div class="line"></div>
-						<div class="line"></div>
-						<div class="line"></div>
+					<div className="loader">
+						<div className="line"></div>
+						<div className="line"></div>
+						<div className="line"></div>
+						<div className="line"></div>
+						<div className="line"></div>
 					</div>
 				</div>
 			)}

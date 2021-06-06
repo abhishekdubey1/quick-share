@@ -39,7 +39,7 @@ const NavBar = () => {
 							/>
 						</a>
 					</div>
-					<SearchBar className={`${width < 600 ? "ps-ab top-55" : ""}`} />
+					<SearchBar className={`${width < 600 ? "ps-ab top-90" : ""}`} />
 					<div className="nav-links">
 						<Link to="/myfollowingpost">
 							<div>

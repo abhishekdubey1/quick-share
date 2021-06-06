@@ -17,8 +17,8 @@
 	justify-content: center;
 	align-items: center;
 }
-.top-55 {
-	margin-top: 55px;
+.top-90 {
+	margin-top: 9rem;
 }
 .ht-50 {
 	height: 50rem;
@@ -46,4 +46,21 @@
 
 .cu-po {
 	cursor: pointer;
+}
+.feed-noposts {
+	text-align: center;
+}
+
+.feed-noposts div {
+	font-size: 1.8rem;
+	margin-top: 20px;
+}
+.feed-noposts a {
+	color: dodgerblue;
+	font-size: 2rem;
+}
+.feed-noposts a::after {
+	content: " OR ";
+	color: black;
+	font-size: 2rem;
 }
