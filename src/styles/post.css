@@ -107,6 +107,7 @@
 }
 .commenter {
 	color: black;
+	text-transform: capitalize;
 }
 .del-comment-btn {
 	cursor: pointer;
