@@ -4,9 +4,9 @@ import {
   DELETE_POST,
   SET_FOLLOWINGS_POSTS,
   LIKE_POST,
-  UNLIKE_POST,
-  ADD_COMMENT,
-  DELETE_COMMENT
+  UNLIKE_POST
+  // ADD_COMMENT,
+  // DELETE_COMMENT
 } from "../types";
 import { produce } from "immer";
 const INITIAL_STATE = [];
