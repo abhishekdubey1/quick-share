@@ -40,6 +40,7 @@ export const Routing = () => {
     );
   }
   if (user.name) {
+    return <h1>Development in progress</h1>;
     return (
       <Routes>
         <PrivateRoute
