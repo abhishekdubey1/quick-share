@@ -17,8 +17,8 @@ const signupApiCall = async user => {
   return await axios.post(`${apiEndPoint}/auth`, user);
 };
 function setToLocalStorage(token, user) {
-  // localStorage.setItem("jwt", token);
-  // localStorage.setItem("user", JSON.stringify(user));
+  localStorage.setItem("jwt", token);
+  localStorage.setItem("user", JSON.stringify(user));
 }
 function* loginUser({ payload }) {
   try {

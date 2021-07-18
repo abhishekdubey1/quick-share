@@ -3,8 +3,8 @@ import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 // import { likePost } from "../utils/apiCalls";
 import { apiEndPoint } from "../utils/helper";
-import CommentBox from "./CommentBox";
-import { DeleteBtn, LikeBtn, UnLikeBtn } from "./Svg";
+import CommentBox from "../components/CommentBox";
+import { DeleteBtn, LikeBtn, UnLikeBtn } from "../components/Svg";
 
 function SinglePost(props) {
   const { postIdParam } = useParams();
