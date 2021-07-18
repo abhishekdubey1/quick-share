@@ -12,6 +12,8 @@ export const signup = user => {
   };
 };
 export const logout = () => {
+  localStorage.setItem("jwt", null);
+  localStorage.setItem("user", JSON.stringify({}));
   return {
     type: LOGOUT_USER,
     payload: {}
