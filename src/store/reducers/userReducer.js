@@ -12,7 +12,6 @@ const INITIAL_STATE = {
 export default function userReducer(state = INITIAL_STATE, { type, payload }) {
   switch (type) {
     case LOGIN_USER: {
-      console.log({ payload });
       return { ...state, ...payload.user };
     }
     case LOGOUT_USER: {
