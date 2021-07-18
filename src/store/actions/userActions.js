@@ -1,4 +1,4 @@
-import { LOGIN_USER_SAGA, LOGOUT_USER, SIGNUP_USER_SAGA } from "../types";
+import { LOGIN_USER_SAGA, LOGOUT_USER_SAGA, SIGNUP_USER_SAGA } from "../types";
 export const login = user => {
   return {
     type: LOGIN_USER_SAGA,
@@ -12,10 +12,8 @@ export const signup = user => {
   };
 };
 export const logout = () => {
-  localStorage.setItem("jwt", null);
-  localStorage.setItem("user", JSON.stringify({}));
   return {
-    type: LOGOUT_USER,
+    type: LOGOUT_USER_SAGA,
     payload: {}
   };
 };

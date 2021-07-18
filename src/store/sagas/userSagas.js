@@ -5,6 +5,8 @@ import { makeToasts } from "../actions/toastActions";
 import {
   LOGIN_USER,
   LOGIN_USER_SAGA,
+  LOGOUT_USER,
+  LOGOUT_USER_SAGA,
   SET_LOGIN_STATUS,
   SET_SIGNUP_STATUS,
   SIGNUP_USER_SAGA
@@ -72,8 +74,17 @@ function* signupUser({ payload }) {
     // error: error?.response?.data?.error || error.message
   }
 }
-
+function removeFromLocal(params) {
+  localStorage.removeItem("jwt");
+  localStorage.removeItem("user");
+}
+function* logoutUser() {
+  yield removeFromLocal();
+  yield put({ type: LOGOUT_USER, payload: {} });
+  yield put(makeToasts("info", "Logged out"));
+}
 export default function* watchUserSagas() {
   yield takeEvery(LOGIN_USER_SAGA, loginUser);
   yield takeEvery(SIGNUP_USER_SAGA, signupUser);
+  yield takeEvery(LOGOUT_USER_SAGA, logoutUser);
 }
