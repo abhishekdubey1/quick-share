@@ -1,41 +1,24 @@
-import { useContext, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { UserContext } from "../context/UserContext";
-import { ROUTES, apiEndPoint, validateData, ipClass } from "../utils/helper";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { ROUTES, ipClass } from "../utils/helper";
 import { useTitle, useForm } from "../utils/customHooks";
-import axios from "axios";
-const initialState = { email: "", password: "" };
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../store/actions/userActions";
+const initialState = { email: "test1@gmail.com", password: "test123" };
 const SignIn = () => {
-  const { dispatch } = useContext(UserContext);
-  const history = useHistory();
+  const dispatch = useDispatch();
+  const { status } = useSelector(state => state.loader.signinLoader);
   useTitle("Login - Instagram");
   const { handleChange, values } = useForm(initialState);
-  const [status, setStatus] = useState("idle");
   const [showPassword, setShowPassword] = useState(false);
-  async function handleSignIn(e) {
+  function handleSignIn(e) {
     e.preventDefault();
     if (
       values.email.toString().trim() &&
       values.password.toString().trim() &&
       status !== "loading"
     ) {
-      try {
-        setStatus("loading");
-        const { data } = await axios.post(`${apiEndPoint}/signin`, {
-          password: values.password, //values.password,
-          email: values.email, //values.email,
-        });
-        localStorage.setItem("jwt", data.token);
-        localStorage.setItem("user", JSON.stringify(data.user));
-        dispatch({ type: "USER", payload: data.user });
-        setStatus("accepted");
-        alert("Signed In Successfully");
-        history.push("/profile");
-      } catch (error) {
-        // alert("There was some error");
-        setStatus("rejected");
-        console.log(error);
-      }
+      dispatch(login({ email: values.email, password: values.password }));
     }
   }
 
@@ -86,7 +69,7 @@ const SignIn = () => {
             <div
               role="button"
               className="show-pwd"
-              onClick={() => setShowPassword((s) => !s)}
+              onClick={() => setShowPassword(s => !s)}
             >
               {showPassword ? "Hide" : "Show"}
             </div>
@@ -96,7 +79,8 @@ const SignIn = () => {
           type="submit"
           disabled={status === "loading" || status === "accepted"}
           className={`login-btn ${
-            (!validateData(values) || status === "loading") && "disabled "
+            ""
+            // (!validateData(values) || status === "loading") && "disabled "
           }`}
         >
           Log{status === "loading" && "ing "} In
@@ -106,14 +90,7 @@ const SignIn = () => {
           <span className="fb-icon">f</span>Log in with Facebook
         </div>
       </form>
-      {status === "rejected" && (
-        <span className="auth-loading auth-err" role="alert">
-          There was some error, try again
-          <div className="error">
-            <span>!</span>
-          </div>
-        </span>
-      )}
+
       {status === "loading" && (
         <span className="auth-loading loading">
           Please wait while we log you in
@@ -125,7 +102,21 @@ const SignIn = () => {
 };
 const NoAccount = () => (
   <div className="noaccount">
-    Don't have an account? <Link to={ROUTES.SIGN_UP}>Sign up</Link>
+    Don't have an account? <Link to={`/${ROUTES.SIGN_UP}`}>Sign up</Link>
   </div>
 );
 export default SignIn;
+
+// //  status === "fail" && (
+//     <div className="auth-loading auth-err" role="alert">
+//       {
+//         error
+//         //There was some error, try again
+//       }
+
+//       <div className="error">
+//         <span>!</span>
+//       </div>
+//     </div>
+//   );
+// }

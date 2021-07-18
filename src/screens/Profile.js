@@ -1,59 +1,59 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Main, PhotoPosts } from "../components/Profile/ProfileComponents";
 import { Picture, Stats } from "../components/Profile/ProfileComponents";
-import { UserContext } from "../context/UserContext";
 import { fetchUserPosts } from "../utils/apiCalls";
 import { useMount, useTitle } from "../utils/customHooks";
 import { capitalize } from "../utils/helper";
 
 const Profile = () => {
-	const { state } = useContext(UserContext);
-	const [status, setStatus] = useState("idle");
-	let { dpUrl, name, email, followers, following, postsCount } =
-		state || JSON.parse(localStorage.getItem("user"));
-	const [posts, setPosts] = useState([]);
-	useTitle(`${capitalize(name)} - Instagram`);
-	const isMounted = useMount();
-	useEffect(() => {
-		setStatus("loading");
-		fetchUserPosts()
-			.then((res) => {
-				if (isMounted) {
-					setPosts(res.data);
-					setStatus("accepted");
-				}
-			})
-			.catch((err) => console.error(err));
-	}, [isMounted]);
-	useEffect(() => console.log(posts), [posts]);
-	return (
-		<div className="profile">
-			<header className="profile__head">
-				<Picture dpUrl={dpUrl} name={name} />
-				<Main name={name} showFollow={false} showEdit={true} />
-				<h2 className="profile__email">{email}</h2>
-				<Stats
-					postsCount={postsCount}
-					followers={followers}
-					following={following}
-				/>
-			</header>
-			{(status === "accepted" || status === "idle") && (
-				<PhotoPosts posts={posts || []} />
-			)}
-			{status === "loading" && (
-				<div className="ht-50 fl-ct">
-					<div className="loader">
-						<div className="line"></div>
-						<div className="line"></div>
-						<div className="line"></div>
-						<div className="line"></div>
-						<div className="line"></div>
-					</div>
-				</div>
-			)}
-		</div>
-	);
+  const [status, setStatus] = useState("idle");
+  const { user: state } = useSelector(state => state);
+  let { dpUrl, name, email, followers, following, postsCount } =
+    state || JSON.parse(localStorage.getItem("user"));
+  const [posts, setPosts] = useState([]);
+  useTitle(`${capitalize(name)} - Instagram`);
+  const isMounted = useMount();
+  useEffect(() => {
+    setStatus("loading");
+    fetchUserPosts()
+      .then(res => {
+        if (isMounted) {
+          setPosts(res.data);
+          setStatus("accepted");
+        }
+      })
+      .catch(err => console.error(err));
+  }, [isMounted]);
+  useEffect(() => console.log(posts), [posts]);
+  return (
+    <div className="profile">
+      <header className="profile__head">
+        <Picture dpUrl={dpUrl} name={name} />
+        <Main name={name} showFollow={false} showEdit={true} />
+        <h2 className="profile__email">{email}</h2>
+        <Stats
+          postsCount={postsCount}
+          followers={followers}
+          following={following}
+        />
+      </header>
+      {(status === "accepted" || status === "idle") && (
+        <PhotoPosts posts={posts || []} />
+      )}
+      {status === "loading" && (
+        <div className="ht-50 fl-ct">
+          <div className="loader">
+            <div className="line"></div>
+            <div className="line"></div>
+            <div className="line"></div>
+            <div className="line"></div>
+            <div className="line"></div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default Profile;

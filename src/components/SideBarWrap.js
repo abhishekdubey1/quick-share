@@ -1,13 +1,11 @@
-import { useContext } from "react";
-import { UserContext } from "../context/UserContext";
+import { useSelector } from "react-redux";
 
 const SideBarWrap = ({ children }) => {
-  let { state } = useContext(UserContext);
-  state = state || JSON.parse(localStorage.getItem("user"));
+  const { user } = useSelector(state => state.user);
   const SideBar = () => (
     <div className="sidebar">
       <div>
-        <img src={state.dpUrl} alt="Your profile diplay" />
+        <img src={user.dpUrl} alt="Your profile diplay" />
         <div>
           <span>_abhishekdubey_</span>
           <span>Abhishek Dubey</span>
@@ -20,7 +18,7 @@ const SideBarWrap = ({ children }) => {
         </p>
         <ul>
           <li>
-            <img src={state.dpUrl} alt="" />
+            <img src={user.dpUrl} alt="" />
             <div>
               <span>_abhishekdubey_</span>
               <span>Abhishek Dubey</span>
@@ -28,7 +26,7 @@ const SideBarWrap = ({ children }) => {
             <button>Follow</button>
           </li>
           <li>
-            <img src={state.dpUrl} alt="" />
+            <img src={user.dpUrl} alt="" />
             <div>
               <span>_abhishekdubey_</span>
               <span>Abhishek Dubey</span>

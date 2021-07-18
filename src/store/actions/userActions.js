@@ -1,7 +1,13 @@
-import { LOGIN_USER_SAGA, LOGOUT_USER } from "../types";
-export const login = (user) => {
+import { LOGIN_USER_SAGA, LOGOUT_USER, SIGNUP_USER_SAGA } from "../types";
+export const login = user => {
   return {
     type: LOGIN_USER_SAGA,
+    payload: { user }
+  };
+};
+export const signup = user => {
+  return {
+    type: SIGNUP_USER_SAGA,
     payload: { user }
   };
 };

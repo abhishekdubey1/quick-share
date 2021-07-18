@@ -1,61 +1,46 @@
-import { Link, useHistory } from "react-router-dom";
-import {
-  apiEndPoint,
-  defaultSrc,
-  hookupcloudUrl,
-  ipClass,
-  validateData,
-} from "../utils/helper";
+import { Link } from "react-router-dom";
+// hookupcloudUrl,
+import { ipClass, validateData } from "../utils/helper";
 import { useTitle, useForm, useImage } from "../utils/customHooks";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { signup } from "../store/actions/userActions";
 const initialState = {
-  name: "",
-  email: "",
-  password: "",
-  confirmPassword: "",
+  name: "chan",
+  email: "chan@gmail.com",
+  password: "chan123",
+  confirmPassword: "chan123"
 };
 
 const SignUp = () => {
-  const history = useHistory();
   const { handleChange, values } = useForm(initialState);
   const { name, email, password, confirmPassword } = values;
   const { clearImage, ipRef, onSelectFile, image, preview } = useImage();
   useTitle("Sign Up - Instagram");
-
-  async function submitForm(dpUrl = defaultSrc) {
+  const { status } = useSelector(state => state.loader.signupLoader);
+  const dispatch = useDispatch();
+  function submitForm(dpUrl) {
     if (name && password && email && password === confirmPassword) {
-      try {
-        const { data } = await axios.post(`${apiEndPoint}/signup`, {
-          name: name.toString().trim() || "Chan",
-          password: password || "chan1234", //password,
-          email: email.toString().trim() || "chan@gmail.com", //email,
-          dpUrl,
-        });
-        alert(data.message);
-        history.push("/signin");
-      } catch (error) {
-        alert(error.message);
-      }
+      dispatch(signup({ ...values, dpUrl }));
     }
   }
-  async function uploadPic() {
-    if (image) {
-      const data = new FormData();
-      data.append("file", image);
-      data.append("upload_preset", "hook-up");
-      data.append("cloud_name", "hookupcloudddddddddddd");
-      console.log("request to cloud");
-      const res = await fetch(hookupcloudUrl, {
-        method: "post",
-        body: data,
-      });
-      const resData = await res.json();
-      console.log("res from cloud", { url: resData.url });
-      submitForm(resData.url);
-    } else {
-      submitForm();
-    }
-  }
+  // async function uploadPic() {
+  //   if (image) {
+  //     const data = new FormData();
+  //     data.append("file", image);
+  //     data.append("upload_preset", "hook-up");
+  //     data.append("cloud_name", "hookupcloudddddddddddd");
+  //     console.log("request to cloud");
+  //     const res = await fetch(hookupcloudUrl, {
+  //       method: "post",
+  //       body: data
+  //     });
+  //     const resData = await res.json();
+  //     console.log("res from cloud", { url: resData.url });
+  //     submitForm(resData.url);
+  //   } else {
+  //     submitForm();
+  //   }
+  // }
   return (
     <div className="signup-container">
       <br />
@@ -150,12 +135,12 @@ const SignUp = () => {
         {image && <img src={preview} alt="" className="dp-preview" />}
         {!image && "No - Image"}
       </div>
-
       <button
         className={`signup-btn  ${!validateData(values) && "disabled"}`}
-        onClick={uploadPic}
+        onClick={() => status !== "loading" && submitForm()}
       >
-        Sign up
+        {status !== "loading" && "Sign up"}
+        {status === "loading" && "Creating your account"}
       </button>
     </div>
   );

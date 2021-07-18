@@ -1,30 +1,16 @@
-import {
-	useState,
-	useContext,
-	useLayoutEffect,
-	useEffect,
-	useCallback,
-} from "react";
-import { useHistory } from "react-router-dom";
-import { UserContext } from "../context/UserContext";
+import { useState, useEffect, useCallback } from "react";
 import { useMount, useTitle } from "../utils/customHooks";
 import { fetchPosts } from "../utils/apiCalls";
 import Post from "../components/Post";
 import { initialState } from "../utils/helper";
+import { useSelector } from "react-redux";
 const Home = () => {
-	const history = useHistory();
-	let { state } = useContext(UserContext);
-	state = state || JSON.parse(localStorage.getItem("user"));
+	const { user } = useSelector((user) => user);
 	const [{ data, error, status }, setAppState] = useState({
 		...initialState,
 		data: [],
 	});
 
-	useLayoutEffect(() => {
-		if (!state) {
-			history.push("/signin");
-		}
-	}, [history, state]);
 	const isMounted = useMount();
 	useTitle("Home - Instagram");
 
@@ -53,11 +39,11 @@ const Home = () => {
 		setAppState({ status: "accepted", data: newData });
 	};
 	useEffect(() => {
-		if (state) {
+		if (user) {
 			handleFetchPosts();
 		}
 		return () => {};
-	}, [handleFetchPosts, state]);
+	}, [handleFetchPosts, user]);
 	return (
 		<div className="home">
 			<br />
@@ -67,13 +53,13 @@ const Home = () => {
 						<Post
 							key={item?._id}
 							postId={item?._id}
-							isOwnPost={state?._id === item?.postedBy?._id}
+							isOwnPost={user?._id === item?.postedBy?._id}
 							src={item?.postUrl}
 							postedBy={item?.postedBy}
 							likes={item?.likes}
 							dpUrl={item?.dpUrl}
 							caption={item?.caption}
-							isLiked={item?.likes?.includes(state?._id)}
+							isLiked={item?.likes?.includes(user?._id)}
 							likeFunction={likeFunction}
 						/>
 					);
@@ -109,7 +95,7 @@ const Home = () => {
 
 export default Home;
 /*
-      {!state && (
+      {!user && (
         <Link to={"/signin"}>
           <h3 className="">Please Login</h3>
         </Link>
