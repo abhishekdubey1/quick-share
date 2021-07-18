@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Routes } from "react-router-dom";
 import { login } from "./store/actions/userActions.js";
 import SignIn from "./screens/SignIn";
@@ -10,77 +10,71 @@ import Profile from "./screens/Profile";
 import CreatePost from "./screens/CreatePost";
 import UserProfile from "./components/UserProfile";
 import FollowingsPost from "./screens/FollowingsPost";
-import SinglePost from "./screens/SinglePost";
+import SinglePost from "./components/SinglePost";
 import NotFound from "./screens/404-page";
-import { LOGIN_USER } from "./store/types.js";
 
 export const Routing = () => {
-  const { email, _id } = useSelector(state => state.user);
-  const dispatch = useDispatch();
+  const { user } = useSelector(state => state);
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    if (user) {
-      dispatch({
-        type: LOGIN_USER,
-        payload: { user }
-      });
+    const savedUser = JSON.parse(localStorage.getItem("user"));
+    if (savedUser) {
+      login(savedUser);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  // if (!name) {
+  // if (!user.name) {
   //   return (
   //     <Routes>
   //     </Routes>
   //   );
   // }
-  // if (name) {
+  // if (user.name) {
   // return <h1>Development in progress</h1>;
   return (
     <Routes>
       <PrivateRoute
-        condition={email}
+        condition={user.email}
         redirectPath="/signin"
         path="/"
         element={<Home />}
       />
       <PrivateRoute
-        condition={email}
+        condition={user.email}
         redirectPath="/signin"
         path="/profile"
         element={<Profile />}
       />
       <PrivateRoute
-        condition={email}
+        condition={user.email}
         redirectPath="/signin"
         path="/create"
         element={<CreatePost />}
       />
       <PrivateRoute
-        condition={email}
+        condition={user.email}
         redirectPath="/signin"
         path="/profile/:userid"
         element={<UserProfile />}
       />
       <PrivateRoute
-        condition={email}
+        condition={user.email}
         redirectPath="/signin"
         path="/post/:postIdParam"
-        element={<SinglePost userId={_id || ""} />}
+        element={<SinglePost userId={user._id || ""} />}
       />
       <PrivateRoute
-        condition={email}
+        condition={user.email}
         redirectPath="/signin"
         path="/myfollowingpost"
         element={<FollowingsPost />}
       />
       <PrivateRoute
-        condition={!email}
+        condition={!user.email}
         path="/signin"
         redirectPath="/"
         element={<SignIn />}
       />
       <PrivateRoute
-        condition={!email}
+        condition={!user.email}
         path="/signup"
         redirectPath="/"
         element={<SignUp />}

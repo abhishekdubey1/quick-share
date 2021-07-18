@@ -19,7 +19,6 @@ const Home = () => {
   // };
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log("calling");
     dispatch(setPosts(isMounted));
   }, [dispatch, isMounted]);
   if (status === "loading") {
