@@ -21,11 +21,10 @@ const SearchBar = ({ className }) => {
   const getUsers = useCallback(async () => {
     try {
       setStatus("requesting");
-      console.log("getting users");
-      const response = await axios(`${apiEndPoint}/allusers/${input}`, {
+      const { data } = await axios(`${apiEndPoint}/user/search/${input}`, {
         ...headers
       });
-      setUsers(response.data);
+      setUsers(data.users);
       setStatus("accepted");
     } catch (error) {
       console.log({ error });
@@ -35,12 +34,10 @@ const SearchBar = ({ className }) => {
   useEffect(() => {
     let timer = setTimeout(() => {
       if (input) {
-        console.log("calling backend");
         getUsers();
       }
     }, 600);
     return () => {
-      console.log("clearing the timeout");
       clearTimeout(timer);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps

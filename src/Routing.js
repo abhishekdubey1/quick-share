@@ -1,83 +1,100 @@
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Routes } from "react-router-dom";
-import { login } from "./store/actions/userActions.js";
+// import { login } from "./store/actions/userActions.js";
 import SignIn from "./screens/SignIn";
 import PrivateRoute from "./components/PrivateRoute";
 import SignUp from "./screens/Signup";
 import Home from "./screens/Home";
 import Profile from "./screens/Profile";
 import CreatePost from "./screens/CreatePost";
-import UserProfile from "./components/UserProfile";
+import UserProfile from "./components/Profile/UserProfile";
 import FollowingsPost from "./screens/FollowingsPost";
 import SinglePost from "./components/SinglePost";
 import NotFound from "./screens/404-page";
+import {
+  EditProfile,
+  EditDp,
+  EditPassword
+} from "./components/Profile/EditProfile";
 
 export const Routing = () => {
   const { user } = useSelector(state => state);
+  const savedUser = JSON.parse(localStorage.getItem("user"));
+  const dispatch = useDispatch();
   useEffect(() => {
-    const savedUser = JSON.parse(localStorage.getItem("user"));
-    if (savedUser) {
-      login(savedUser);
+    if (savedUser && !user.email) {
+      dispatch({ type: "LOGIN_USER", payload: { user: savedUser } });
     }
-  }, []);
-  // if (!user.name) {
-  //   return (
-  //     <Routes>
-  //     </Routes>
-  //   );
-  // }
-  // if (user.name) {
-  // return <h1>Development in progress</h1>;
+    // eslint-disable-next-line
+  }, [savedUser, user.email]);
   return (
     <Routes>
       <PrivateRoute
-        condition={user.email}
+        condition={savedUser}
         redirectPath="/signin"
         path="/"
         element={<Home />}
       />
       <PrivateRoute
-        condition={user.email}
+        condition={savedUser}
         redirectPath="/signin"
         path="/profile"
         element={<Profile />}
       />
       <PrivateRoute
-        condition={user.email}
+        condition={savedUser}
         redirectPath="/signin"
         path="/create"
         element={<CreatePost />}
       />
       <PrivateRoute
-        condition={user.email}
+        condition={savedUser}
         redirectPath="/signin"
         path="/profile/:userid"
         element={<UserProfile />}
       />
       <PrivateRoute
-        condition={user.email}
+        condition={savedUser}
         redirectPath="/signin"
         path="/post/:postIdParam"
         element={<SinglePost userId={user._id || ""} />}
       />
       <PrivateRoute
-        condition={user.email}
+        condition={savedUser}
         redirectPath="/signin"
         path="/myfollowingpost"
         element={<FollowingsPost />}
       />
       <PrivateRoute
-        condition={!user.email}
+        condition={!savedUser}
         path="/signin"
         redirectPath="/"
         element={<SignIn />}
       />
       <PrivateRoute
-        condition={!user.email}
+        condition={!savedUser}
         path="/signup"
         redirectPath="/"
         element={<SignUp />}
+      />
+      <PrivateRoute
+        condition={savedUser}
+        path="/edit-profile"
+        redirectPath="/"
+        element={<EditProfile />}
+      />
+      <PrivateRoute
+        condition={savedUser}
+        path="/edit-dp"
+        redirectPath="/"
+        element={<EditDp />}
+      />
+      <PrivateRoute
+        condition={savedUser}
+        path="/edit-password"
+        redirectPath="/"
+        element={<EditPassword />}
       />
       <Routes path="*">
         <NotFound />

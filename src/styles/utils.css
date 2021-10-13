@@ -1,66 +1,76 @@
 .not-found > b {
-	font-size: 1.9rem;
+  font-size: 1.9rem;
 }
 .not-found {
-	font-size: 1.7rem;
-	text-align: center;
+  font-size: 1.7rem;
+  text-align: center;
 }
 
 .b {
-	font-weight: 500;
+  font-weight: 500;
 }
 .dn {
-	display: none;
+  display: none;
 }
 .fl-ct {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .top-90 {
-	margin-top: 9rem;
+  margin-top: 9rem;
 }
 .ht-50 {
-	height: 50rem;
+  height: 50rem;
 }
 .ps-rl {
-	position: relative;
+  position: relative;
 }
 .ps-ab {
-	position: absolute;
+  position: absolute;
 }
 .fs-sm {
-	font-size: 13px;
+  font-size: 13px;
+}
+.fs-md {
+  font-size: 14px;
 }
 .fs-lg {
-	font-size: 20px;
+  font-size: 20px;
 }
 .lg {
-	background: limegreen;
-	color: limegreen;
+  background: limegreen;
+  color: limegreen;
 }
 .gy {
-	background: gray;
-	color: gray;
+  background: gray;
+  color: gray;
 }
 
 .cu-po {
-	cursor: pointer;
+  cursor: pointer;
 }
 .feed-noposts {
-	text-align: center;
+  text-align: center;
 }
 
 .feed-noposts div {
-	font-size: 1.8rem;
-	margin-top: 20px;
+  font-size: 1.8rem;
+  margin-top: 20px;
 }
 .feed-noposts a {
-	color: dodgerblue;
-	font-size: 2rem;
+  color: dodgerblue;
+  font-size: 2rem;
 }
 .feed-noposts a::after {
-	content: " OR ";
-	color: black;
-	font-size: 2rem;
+  content: " OR ";
+  color: black;
+  font-size: 2rem;
+}
+
+.ps-ab-center {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
 }

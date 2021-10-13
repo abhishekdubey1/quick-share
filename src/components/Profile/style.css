@@ -1,0 +1,111 @@
+.hideCaption {
+  display: none;
+}
+.showCaption {
+  display: block;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+}
+.myDiv {
+  position: relative;
+  width: max-content;
+}
+
+.postRow {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE10 */
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
+
+/* Create four equal columns that sits next to each other */
+.postColumn {
+  -ms-flex: 25%; /* IE10 */
+  flex: 25%;
+  padding: 0 4px;
+}
+
+.postColumn img {
+  margin-top: 8px;
+  vertical-align: middle;
+  width: 100%;
+}
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 800px) {
+  .postColumn {
+    -ms-flex: 50%;
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .postColumn {
+    -ms-flex: 100%;
+    flex: 100%;
+    max-width: 100%;
+  }
+}
+
+.btn-edit-dp {
+  transform: translate(-50%, -50%);
+  top: 35%;
+  left: 70%;
+}
+.btn-edit-dp:hover {
+  color: white;
+  text-decoration: underline;
+}
+.edit-profile {
+  margin: 100px auto;
+}
+.btn-edit-profile {
+  margin-left: 6px;
+}
+.btn-edit-profile:hover {
+  background-color: tomato;
+}
+.btn-edit-save {
+  background-color: dodgerblue;
+  color: white;
+  font-size: 1rem;
+  padding: 8px;
+  margin: 0 60px;
+  border: 0px solid black;
+  cursor: pointer;
+  font-size: 1.4rem;
+}
+.btn-edit-save span {
+  color: black;
+  font-weight: 700;
+  font-size: larger;
+}
+
+.not-changed {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.dp-preview {
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.edit-dp {
+  padding: 0;
+  justify-content: space-around;
+}

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { fetchUser } from "../utils/apiCalls";
-import { Main, PhotoPosts, Picture, Stats } from "./Profile/ProfileComponents";
+import { fetchUser } from "../../utils/apiCalls";
+import { Main, PhotoPosts, Picture, Stats } from "./ProfileComponents";
 let initialState = {
   dpUrl: null,
   name: null,
@@ -11,17 +11,26 @@ let initialState = {
   following: null,
   postsCount: null
 };
-const Profile = () => {
+const UserProfile = () => {
   const [user, setUser] = useState(initialState);
   const [posts, setPosts] = useState([]);
   const { userid } = useParams();
   useEffect(() => {
     fetchUser(userid, setUser, setPosts);
   }, [userid]);
-  const { user: state } = useSelector(state => state);
-  let { dpUrl, name, email, followers, following, postsCount } = user;
-  let isLoaded = user.dpUrl;
-  let isFollowed = followers?.includes(state._id);
+  let {
+    dpUrl,
+    name,
+    email,
+    followers,
+    // following,
+    postsCount,
+    followersCount,
+    followingCount
+  } = user;
+  const isLoaded = user.dpUrl;
+  const _id = useSelector(state => state.user._id);
+  const isFollowed = followers !== null ? followers.includes(_id) : false;
 
   return isLoaded ? (
     <div className="profile">
@@ -39,8 +48,8 @@ const Profile = () => {
         <h2 className="profile__email">{email}</h2>
         <Stats
           postsCount={postsCount}
-          followers={followers}
-          following={following}
+          followers={followersCount}
+          following={followingCount}
         />
       </header>
       <PhotoPosts posts={posts} />
@@ -50,9 +59,9 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default UserProfile;
 /*
-   
+
       "followedUser": {
         "dpUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs7kc4LWYMTgCvPRNPCDK99Vf0O1vggwWsgA&usqp=CAU",
         "followers": [

@@ -1,16 +1,16 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../store/actions/userActions";
 import { useOnlineStatus, useWindowSize } from "../utils/customHooks";
 import SearchBar from "./SearchBar";
-import { CreatePostIcon, ExploreBtn, LogoutIcon, ProfileIcon } from "./Svg";
+import { CreatePostIcon, LogoutIcon, ProfileIcon } from "./Svg";
 const NavBar = () => {
-  const { user } = useSelector(state => state);
+  const token = localStorage.getItem("jwt");
   const { width } = useWindowSize();
   const isOnline = useOnlineStatus();
   const dispatch = useDispatch();
   return (
-    user.name && (
+    token && (
       <>
         <div className="nav-container">
           <nav className="nav">
@@ -25,11 +25,11 @@ const NavBar = () => {
             </div>
             <SearchBar className={`${width < 600 ? "ps-ab top-90" : ""}`} />
             <div className="nav-links">
-              <Link to="/myfollowingpost">
+              {/* <Link to="/myfollowingpost">
                 <div>
                   <ExploreBtn />
                 </div>
-              </Link>
+              </Link> */}
               <Link to="/create">
                 <div>
                   <CreatePostIcon />
@@ -52,12 +52,6 @@ const NavBar = () => {
             </div>
           </nav>
         </div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
       </>
     )
   );

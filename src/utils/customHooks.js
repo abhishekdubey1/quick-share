@@ -5,7 +5,7 @@ export function useWindowSize() {
   // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
   const [windowSize, setWindowSize] = useState({
     width: undefined,
-    height: undefined,
+    height: undefined
   });
   useEffect(() => {
     // Handler to call on window resize
@@ -13,7 +13,7 @@ export function useWindowSize() {
       // Set window width/height to state
       setWindowSize({
         width: window.innerWidth,
-        height: window.innerHeight,
+        height: window.innerHeight
       });
     }
     // Add event listener
@@ -88,7 +88,7 @@ export function useImage() {
     return () => URL.revokeObjectURL(objectUrl);
   }, [image]);
 
-  const onSelectFile = (e) => {
+  const onSelectFile = e => {
     if (!e.target.files || e.target.files.length === 0) {
       setImage(undefined);
       return;
@@ -98,7 +98,9 @@ export function useImage() {
     setImage(e.target.files[0]);
   };
   const clearImage = () => {
-    ipRef.current.value = "";
+    if (ipRef) {
+      ipRef.current.value = "";
+    }
     setImage(undefined);
     setPreview(undefined);
   };

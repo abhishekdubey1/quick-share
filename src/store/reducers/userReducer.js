@@ -5,8 +5,8 @@ const INITIAL_STATE = {
   name: null,
   _id: null,
   dpUrl: null,
-  followersCount: null,
-  followingCount: null,
+  followers: null,
+  following: null,
   postsCount: null
 };
 export default function userReducer(state = INITIAL_STATE, { type, payload }) {

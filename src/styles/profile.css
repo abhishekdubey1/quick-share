@@ -5,6 +5,7 @@
 	max-width: 700px;
 	background-color: white;
 	min-width: 400px;
+	margin-top: 70px;
 }
 .profile__head {
 	display: grid;

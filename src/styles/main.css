@@ -37,3 +37,6 @@ html {
   font-family: "Kiwi Maru", serif;
   /* font-family: monospace; */
 }
+.home {
+  margin-top: 50px;
+}

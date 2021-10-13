@@ -4,11 +4,12 @@ import { apiEndPoint } from "../../utils/helper";
 import { makeToasts } from "../actions/toastActions";
 import { SET_POSTS, SET_POSTS_SAGA, SET_POST_STATUS } from "../types";
 
-const headers = {
-  Authorization: "Bearer " + localStorage.getItem("jwt")
-};
 const fetchPosts = async user => {
-  return await axios(`${apiEndPoint}/post`, { headers: { ...headers } });
+  return await axios(`${apiEndPoint}/post`, {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("jwt")
+    }
+  });
 };
 
 function* setPostsSaga({ payload }) {
@@ -18,7 +19,6 @@ function* setPostsSaga({ payload }) {
       data: { posts }
     } = yield call(fetchPosts);
     yield put({ type: SET_POST_STATUS, payload: { status: "success" } });
-    yield put(makeToasts("info", "Welcome"));
     yield put({ type: SET_POSTS, payload: { posts } });
   } catch (error) {
     console.log({ error });

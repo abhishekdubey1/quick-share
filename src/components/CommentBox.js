@@ -14,15 +14,17 @@ const CommentBox = ({ postId, comments, userId, isOwnPost }) => {
   const { status } = appState;
   const showHideBtn = count > 4;
   const cmtInput = useRef(null);
+
   const isOwnComment = (postedById) =>
     postedById === userId || isOwnPost ? true : false;
+
   const toProfile = (bool, postedById) =>
     bool ? "profile" : `profile/${postedById}`;
 
   useEffect(() => {
     cmtInput.current.focus();
-    return () => {};
   }, [commentList]);
+
   const addComment = async () => {
     setComment("");
     if (comment.toString().trim() && status !== "loading") {

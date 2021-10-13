@@ -1,36 +1,42 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Main, PhotoPosts } from "../components/Profile/ProfileComponents";
 import { Picture, Stats } from "../components/Profile/ProfileComponents";
-import { fetchUserPosts } from "../utils/apiCalls";
 import { useMount, useTitle } from "../utils/customHooks";
-import { capitalize } from "../utils/helper";
+import { apiEndPoint, capitalize } from "../utils/helper";
 
 const Profile = () => {
   const [status, setStatus] = useState("idle");
-  const { user: state } = useSelector(state => state);
-  let { dpUrl, name, email, followers, following, postsCount } =
-    state || JSON.parse(localStorage.getItem("user"));
+  const { dpUrl, name, email, followers, following, postsCount, _id } =
+    useSelector(state => state.user);
   const [posts, setPosts] = useState([]);
   useTitle(`${capitalize(name)} - Instagram`);
   const isMounted = useMount();
   useEffect(() => {
-    setStatus("loading");
-    fetchUserPosts()
-      .then(res => {
-        if (isMounted) {
-          setPosts(res.data);
-          setStatus("accepted");
+    async function fetchPosts() {
+      setStatus("loading");
+      const { data } = await axios(`${apiEndPoint}/user/${_id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`
         }
-      })
-      .catch(err => console.error(err));
-  }, [isMounted]);
-  useEffect(() => console.log(posts), [posts]);
+      }); //data.user, data.posts
+
+      if (isMounted) {
+        setPosts(data.posts);
+        setStatus("accepted");
+      }
+    }
+    if (_id) {
+      fetchPosts();
+    }
+    // eslint-disable-next-line
+  }, [_id]);
   return (
     <div className="profile">
       <header className="profile__head">
-        <Picture dpUrl={dpUrl} name={name} />
-        <Main name={name} showFollow={false} showEdit={true} />
+        <Picture dpUrl={dpUrl} name={name} showPicture />
+        <Main name={name} showEdit={true} />
         <h2 className="profile__email">{email}</h2>
         <Stats
           postsCount={postsCount}
@@ -38,100 +44,24 @@ const Profile = () => {
           following={following}
         />
       </header>
-      {(status === "accepted" || status === "idle") && (
-        <PhotoPosts posts={posts || []} />
-      )}
-      {status === "loading" && (
-        <div className="ht-50 fl-ct">
-          <div className="loader">
-            <div className="line"></div>
-            <div className="line"></div>
-            <div className="line"></div>
-            <div className="line"></div>
-            <div className="line"></div>
-          </div>
-        </div>
-      )}
+      {status === "accepted" && <PhotoPosts posts={posts || []} />}
+      {<Loader status={status === "loading"} />}
     </div>
   );
 };
 
 export default Profile;
-// const [image, setImage] = useState("");
-
-// useEffect(() => {
-// 	if (image) {
-// 		const data = new FormData();
-// 		data.append("file", image);
-// 		data.append("upload_preset", "insta-clone");
-// 		data.append("cloud_name", "cnq");
-// 		fetch("https://api.cloudinary.com/v1_1/cnq/image/upload", {
-// 			method: "post",
-// 			body: data,
-// 		})
-// 			.then((res) => res.json())
-// 			.then((data) => {
-// 				fetch("/updatepic", {
-// 					method: "put",
-// 					headers: {
-// 						"Content-Type": "application/json",
-// 						Authorization: "Bearer " + localStorage.getItem("jwt"),
-// 					},
-// 					body: JSON.stringify({
-// 						pic: data.url,
-// 					}),
-// 				})
-// 					.then((res) => res.json())
-// 					.then((result) => {
-// 						console.log(result);
-// 						localStorage.setItem(
-// 							"user",
-// 							JSON.stringify({ ...state, pic: result.pic })
-// 						);
-// 						dispatch({ type: "UPDATEPIC", payload: result.pic });
-// 						//window.location.reload()
-// 					});
-// 			})
-// 			.catch((err) => {
-// 				console.log(err);
-// 			});
-// 	}
-// }, [dispatch, image, state]);
-// const updatePhoto = (file) => {
-// 	setImage(file);
-// };
-// const deleteLater = () => {
-// 	updatePhoto();
-// 	updateProfile();
-// };
-// function updateProfile() {
-// 	fetch("/mypost", {
-// 		headers: {
-// 			Authorization: "Bearer " + localStorage.getItem("jwt"),
-// 		},
-// 	})
-// 		.then((res) => res.json())
-// 		.then((result) => {
-// 			console.log(result);
-// 			setPics(result.mypost);
-// 		});
-// }
-//	false && <button onClick={() => false && deleteLater()}>caution</button>;
-// <div className="profile-posts-container">
-// 	{data?.length &&
-// 		data.map((el) => (
-// 			<div key={el[0]} className="profile-posts-columns">
-// 				{el.map((inEl) => (
-// 					<div key={inEl} className="profile-posts-row">
-// 						{
-// 							<img
-// 								className="profile-posts"
-// 								src={"imgUrl"}
-// 								alt={"post by" + name}
-// 							/>
-// 						}
-// 					</div>
-// 				))}
-// 			</div>
-// 		))}
-// </div>;
+const Loader = ({ status }) =>
+  status ? (
+    <div className="ht-50 fl-ct">
+      <div className="loader">
+        <div className="line"></div>
+        <div className="line"></div>
+        <div className="line"></div>
+        <div className="line"></div>
+        <div className="line"></div>
+      </div>
+    </div>
+  ) : (
+    ""
+  );
