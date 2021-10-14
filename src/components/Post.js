@@ -1,34 +1,23 @@
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { likePost, unlikePost } from "../utils/apiCalls";
+import { makeToasts } from "../store/actions/toastActions";
+import { likePost, unLikePost } from "../store/actions/postActions";
+// import { likePost, unlikePost } from "../utils/apiCalls";
 import { CommentBtn, DeleteBtn, LikeBtn, UnLikeBtn } from "./Svg";
 function Post({ post, isOwnPost, isLiked, likeFn }) {
   const { photo, likes, _id, caption, postedBy } = post;
-  const [status, setStatus] = useState("idle");
-
-  const handleLike = async () => {
-    if (!isLiked) {
-      setStatus("loading");
-      const response = await likePost(_id);
-      likeFn(response.data);
-      setStatus("accepted");
-    }
-  };
-
-  const handleUnlike = async () => {
-    if (isLiked) {
-      setStatus("loading");
-      const response = await unlikePost(_id);
-      if (response.status === 200) {
-        likeFn(response.data);
-      }
-      setStatus("accepted");
-    }
-  };
+  const { status } = useSelector(state => state.loader.likeLoader);
+  const dispatch = useDispatch();
+  // const showError = useCallback(error => {
+  //   dispatch(makeToasts("error", error));
+  //   // eslint-disable-next-line
+  // }, []);
 
   const deletePost = () => {
     let answer = window.confirm("Are you sure you want to delete?");
-    alert(answer ? "Deleted the Post!" : "Okay!");
+    if (answer) {
+      dispatch(makeToasts("success", "Post deleted successfully"));
+    }
   };
 
   const postCreatorProfile = isOwnPost
@@ -57,25 +46,21 @@ function Post({ post, isOwnPost, isLiked, likeFn }) {
       <div
         className="post-main fl-ct"
         title="Open in a new tab"
-        onDoubleClickCapture={() =>
-          !isOwnPost && !isLiked && isAccepted(status) && handleLike()
-        }
+        // onDoubleClickCapture={() =>
+        //   !isOwnPost && !isLiked && handleLike()
+        // }
       >
         <img src={photo} alt="Post" className="post-img" loading="lazy" />
       </div>
       {/* </Link> */}
       <div className="post-features">
-        {!isOwnPost && (
-          <>
-            {!isLiked && isAccepted(status) && (
-              <LikeBtn handleLike={handleLike} />
-            )}
-            {isLiked && isAccepted(status) && (
-              <UnLikeBtn handleLike={handleUnlike} />
-            )}
-            {status === "loading" && <div className="spin-loader" />}
-          </>
+        {!isLiked && isAccepted(status) && (
+          <LikeBtn handleLike={() => !isLiked && dispatch(likePost(_id))} />
         )}
+        {isLiked && isAccepted(status) && (
+          <UnLikeBtn handleLike={() => isLiked && dispatch(unLikePost(_id))} />
+        )}
+        {status === "loading" && <div className="spin-loader" />}
         <Link to={`/post/${_id}`}>
           <CommentBtn />
         </Link>

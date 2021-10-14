@@ -22,35 +22,61 @@ export const EditProfile = () => {
     email: getUserFromLocal().email
   }));
   const { name, email } = values;
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   const stateRef = useRef({
     name: getUserFromLocal().name,
     email: getUserFromLocal().email
   });
   const isChanged = JSON.stringify(values) !== JSON.stringify(stateRef.current);
   const editDetails = async () => {
-    const { data } = await axios.put(
-      `${apiEndPoint}/user`,
-      {
-        name,
-        email
-      },
-      {
-        headers: {
-          Authorization: localStorage.getItem("jwt")
+    setLoading(true);
+    try {
+      const { data } = await axios.put(
+        `${apiEndPoint}/user`,
+        {
+          name,
+          email
+        },
+        {
+          headers: {
+            Authorization: localStorage.getItem("jwt")
+          }
         }
-      }
-    );
-    setValueInLocal("name", data.user.name);
-    setValueInLocal("email", data.user.email);
+      );
+      setValueInLocal("name", data.user.name);
+      setValueInLocal("email", data.user.email);
+      stateRef.current = {
+        name: data.user.name,
+        email: data.user.email
+      };
+      dispatch(makeToasts("success", "Changes saved successfully"));
+    } catch (error) {
+      console.log({ error });
+      dispatch(
+        makeToasts(
+          "error",
+          error.response.data.error ||
+            error.response.data.message ||
+            "Some error saving changes"
+        )
+      );
+    }
+    setLoading(false);
   };
   return (
     <div className="edit-profile Signup">
       <div>
-        <Link to="/edit-dp">Edit Display Picture </Link>
+        <Link className="fs-sm" to="/edit-dp">
+          Edit Display Picture{" "}
+        </Link>
+        <br />
         <br />
         <hr />
         <br />
-        <Link to="/edit-password">Edit Password</Link>
+        <Link className="fs-sm" to="/edit-password">
+          Edit Password
+        </Link>
       </div>
       <div className="form-group">
         <label htmlFor="email" className={`${!email ? "dn" : ""} auth-label`}>
@@ -84,7 +110,7 @@ export const EditProfile = () => {
         className={`btn-edit-save ${isChanged ? "" : "not-changed"}`}
         onClick={() => isChanged && editDetails()}
       >
-        Save
+        {loading ? <span className="loading" /> : "Save"}
       </button>
     </div>
   );

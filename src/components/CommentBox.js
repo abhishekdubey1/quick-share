@@ -1,6 +1,8 @@
 import moment from "moment";
 import { useState, useEffect, useRef } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { makeToasts } from "../store/actions/toastActions";
 import { makeComment, removeComment } from "../utils/apiCalls";
 import { initialState } from "../utils/helper";
 
@@ -8,14 +10,14 @@ const CommentBox = ({ postId, comments, userId, isOwnPost }) => {
   const [comment, setComment] = useState(""); //input
   const [commentList, setCommentList] = useState(comments || []);
   const [count, setCount] = useState(3);
-
+  const dispatch = useDispatch();
   const showViewBtn = commentList.length > 3 && count <= commentList.length;
   const [appState, setAppState] = useState(initialState);
   const { status } = appState;
   const showHideBtn = count > 4;
   const cmtInput = useRef(null);
 
-  const isOwnComment = (postedById) =>
+  const isOwnComment = postedById =>
     postedById === userId || isOwnPost ? true : false;
 
   const toProfile = (bool, postedById) =>
@@ -35,10 +37,10 @@ const CommentBox = ({ postId, comments, userId, isOwnPost }) => {
         setCommentList(commentData);
       }
     } else {
-      alert("Please post a valid comment");
+      dispatch(makeToasts("error", "Comment cannot be empty"));
     }
   };
-  const deleteComment = async (commentId) => {
+  const deleteComment = async commentId => {
     if (status !== "loading") {
       setAppState({ status: "loading" });
       const commentData = await removeComment(commentId, postId);
@@ -48,7 +50,7 @@ const CommentBox = ({ postId, comments, userId, isOwnPost }) => {
       }
     }
   };
-  const incrementCount = () => setCount((c) => c + 3);
+  const incrementCount = () => setCount(c => c + 3);
 
   return (
     <section className="post-comment-sec">
@@ -62,7 +64,7 @@ const CommentBox = ({ postId, comments, userId, isOwnPost }) => {
           Hide Comments
         </button>
       )}
-      {commentList.slice(0, count).map((c) => {
+      {commentList.slice(0, count).map(c => {
         const { _id, text, postedBy, time } = c;
         return (
           <div key={_id} className="comments-container ps-rl">
@@ -84,14 +86,14 @@ const CommentBox = ({ postId, comments, userId, isOwnPost }) => {
         );
       })}
       {(status === "accepted" || status === "idle") && (
-        <form onSubmit={(e) => e.preventDefault()}>
+        <form onSubmit={e => e.preventDefault()}>
           <input
             maxLength="100"
             type="text"
             className="comment-box"
             placeholder="Add a comment..."
             value={comment}
-            onChange={(e) => setComment(e.target.value)}
+            onChange={e => setComment(e.target.value)}
             ref={cmtInput}
           />
           <button

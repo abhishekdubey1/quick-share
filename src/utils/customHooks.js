@@ -93,12 +93,10 @@ export function useImage() {
       setImage(undefined);
       return;
     }
-
-    // I've kept this example simple by using the first image instead of multiple
     setImage(e.target.files[0]);
   };
   const clearImage = () => {
-    if (ipRef) {
+    if (ipRef && ipRef.current) {
       ipRef.current.value = "";
     }
     setImage(undefined);

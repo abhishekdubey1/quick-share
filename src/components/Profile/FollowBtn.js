@@ -1,8 +1,11 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { makeToasts } from "../../store/actions/toastActions";
 import { follow, unFollow } from "../../utils/apiCalls";
 
 const FollowBtn = ({ userid, isFollowed, postsCount, setUser }) => {
   const [status, setStatus] = useState("idle");
+  const dispatch = useDispatch();
   const handleFollow = async () => {
     if (userid) {
       try {
@@ -28,7 +31,14 @@ const FollowBtn = ({ userid, isFollowed, postsCount, setUser }) => {
         }
       } catch (error) {
         console.log(error);
-        alert(error.message);
+        dispatch(
+          makeToasts(
+            "error",
+            error.response.data.error ||
+              error.response.data.message ||
+              error.message
+          )
+        );
         setStatus("idle");
       }
     }

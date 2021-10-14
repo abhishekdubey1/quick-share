@@ -36,7 +36,7 @@ const Home = () => {
           Try refetching?
         </button>
       </div>
-    )
+    );
   }
   return (
     <div className="home">
@@ -47,8 +47,8 @@ const Home = () => {
             post={post}
             isOwnPost={user?._id === post?.postedBy?._id}
             isLiked={post?.likes?.includes(user?._id)}
-            likeFn={(a, b, c) => {
-              console.log(a, b, c);
+            likeFn={post => {
+              console.log(post);
             }}
           />
         );

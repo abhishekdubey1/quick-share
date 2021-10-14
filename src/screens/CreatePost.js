@@ -75,11 +75,6 @@ const CreatePost = () => {
         />
       </div>
       <div className="create-post">
-        {status !== "loading" && (
-          <label htmlFor="create" className="upload">
-            Upload
-          </label>
-        )}
         <input
           type="file"
           id="create"
@@ -88,17 +83,15 @@ const CreatePost = () => {
           ref={ipRef}
           accept="image/*"
         />
-        {image && status !== "loading" && (
-          <div className="clear-img-box">
-            <button className="clear-img" onClick={clearImage}>
-              X
-            </button>
-          </div>
-        )}
         {image && <img src={preview} alt="" className="img-preview" />}
         {!image && "No - Image"}
       </div>
-      <div style={{ margin: "10px" }}>
+      <div className="fl-ct" style={{ padding: "25px 0px" }}>
+        {status !== "loading" && (
+          <label htmlFor="create" className="upload">
+            Upload
+          </label>
+        )}
         <button
           className={`submit-btn ${status === "loading" ? "loading" : ""}`}
           onClick={savePicToCloud}

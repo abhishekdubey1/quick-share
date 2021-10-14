@@ -3,10 +3,7 @@ import {
   CREATE_POST,
   DELETE_POST,
   SET_FOLLOWINGS_POSTS,
-  LIKE_POST,
-  UNLIKE_POST
-  // ADD_COMMENT,
-  // DELETE_COMMENT
+  LIKE_POST
 } from "../types";
 import { produce } from "immer";
 const INITIAL_STATE = [];
@@ -29,13 +26,9 @@ export default function postsReducer(state = INITIAL_STATE, { type, payload }) {
       });
     }
     case LIKE_POST: {
+      const idx = state.findIndex(post => post._id === payload.post._id);
       return produce(state, draft => {
-        draft[payload.postIndex].likes.push(payload.userId);
-      });
-    }
-    case UNLIKE_POST: {
-      return produce(state, draft => {
-        draft[payload.postIndex].likes.splice(payload.userIndex);
+        draft[idx] = payload.post;
       });
     }
     // case ADD_COMMENT: {
