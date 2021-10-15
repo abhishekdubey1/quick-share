@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { twoDArray } from "../../utils/helper";
 import FollowBtn from "./FollowBtn";
 import "./style.css";
@@ -52,10 +52,14 @@ export function Stats(props) {
         <b>{props.postsCount}</b> posts
       </li>
       <li>
-        <b>{props.followers}</b> followers
+        <Link to={`/followers/${props.userid}`}>
+          <b>{props.followers}</b> followers
+        </Link>
       </li>
       <li>
-        <b>{props.following}</b> followings
+        <Link to={`/following/${props.userid}`}>
+          <b>{props.following}</b> followings
+        </Link>
       </li>
     </ul>
   );
@@ -66,6 +70,7 @@ export function PhotoPosts(props) {
   // const mouseLeave = () => setCaption("hideCaption");
   // onMouseEnter={mouseEnter}
   // onMouseLeave={mouseLeave}
+  const navigate = useNavigate();
   return (
     <div id="photos" style={{ margin: "80px 20px" }} className="postRow">
       {props.posts &&
@@ -73,11 +78,12 @@ export function PhotoPosts(props) {
           <div className="postColumn">
             {row.map(post => (
               <img
-                className="profile-post-img"
+                className="profile-post-img cu-po"
                 src={post?.photo}
                 alt={post?.caption}
                 key={post?._id}
                 loading="lazy"
+                onClick={() => navigate(`/post/${post?._id}`)}
               />
             ))}
           </div>

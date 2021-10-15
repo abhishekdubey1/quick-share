@@ -5,11 +5,11 @@ import { makeToasts } from "../actions/toastActions";
 import {
   SET_POSTS,
   SET_POSTS_SAGA,
-  SET_POST_STATUS,
   LIKE_POST_SAGA,
   UNLIKE_POST_SAGA,
   LIKE_POST,
-  SET_LIKE_STATUS
+  SET_LIKE_STATUS,
+  SET_POSTS_STATUS
 } from "../types";
 
 const fetchPosts = () => {
@@ -20,7 +20,7 @@ const fetchPosts = () => {
   });
 };
 
-const likePost = id => {
+export const likePost = id => {
   return axios.put(
     `${apiEndPoint}/post/like/`,
     { id },
@@ -32,7 +32,7 @@ const likePost = id => {
   );
 };
 
-const unlikePost = id => {
+export const unlikePost = id => {
   return axios.put(
     `${apiEndPoint}/post/unlike`,
     { id },
@@ -46,11 +46,11 @@ const unlikePost = id => {
 
 function* setPostsSaga({ payload }) {
   try {
-    yield put({ type: SET_POST_STATUS, payload: { status: "loading" } });
+    yield put({ type: SET_POSTS_STATUS, payload: { status: "loading" } });
     const {
       data: { posts }
     } = yield call(fetchPosts);
-    yield put({ type: SET_POST_STATUS, payload: { status: "success" } });
+    yield put({ type: SET_POSTS_STATUS, payload: { status: "success" } });
     yield put({ type: SET_POSTS, payload: { posts } });
   } catch (error) {
     console.log({ error });
@@ -61,7 +61,7 @@ function* setPostsSaga({ payload }) {
       )
     );
     yield put({
-      type: SET_POST_STATUS,
+      type: SET_POSTS_STATUS,
       payload: {
         status: "fail"
       }

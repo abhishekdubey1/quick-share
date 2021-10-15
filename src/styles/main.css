@@ -40,3 +40,6 @@ html {
 .home {
   margin-top: 50px;
 }
+ul {
+  list-style: none;
+}

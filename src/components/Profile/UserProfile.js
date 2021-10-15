@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { fetchUser } from "../../utils/apiCalls";
 import { Main, PhotoPosts, Picture, Stats } from "./ProfileComponents";
@@ -9,7 +9,8 @@ let initialState = {
   email: null,
   followers: null,
   following: null,
-  postsCount: null
+  postsCount: null,
+  isFollowed: false
 };
 const UserProfile = () => {
   const [user, setUser] = useState(initialState);
@@ -22,15 +23,16 @@ const UserProfile = () => {
     dpUrl,
     name,
     email,
-    followers,
+    // followers,
     // following,
     postsCount,
     followersCount,
-    followingCount
+    followingCount,
+    isFollowed
   } = user;
   const isLoaded = user.dpUrl;
-  const _id = useSelector(state => state.user._id);
-  const isFollowed = followers !== null ? followers.includes(_id) : false;
+  // const _id = useSelector(state => state.user._id);
+  // const isFollowed = followers !== null ? followers.includes(_id) : false;
 
   return isLoaded ? (
     <div className="profile">
@@ -50,6 +52,7 @@ const UserProfile = () => {
           postsCount={postsCount}
           followers={followersCount}
           following={followingCount}
+          userid={userid}
         />
       </header>
       <PhotoPosts posts={posts} />

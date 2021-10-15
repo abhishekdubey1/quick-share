@@ -1,40 +1,30 @@
 import { useEffect } from "react";
-import { useMount, useTitle } from "../utils/customHooks";
+import { useTitle } from "../utils/customHooks";
 import Post from "../components/Post";
 import { useDispatch, useSelector } from "react-redux";
 import { setPosts } from "../store/actions/postActions";
+import { Loader } from "./Profile";
 const Home = () => {
   const { user, posts } = useSelector(state => state);
   const { status, error } = useSelector(state => state.loader.postsLoader);
-  const isMounted = useMount();
   useTitle("Home - Instagram");
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(setPosts(isMounted));
-  }, [dispatch, isMounted]);
+    dispatch(setPosts());
+    // eslint-disable-next-line
+  }, []);
   if (status === "loading") {
-    return (
-      <div className="loader-preview">
-        <div className="instagram-loader">
-          <div>
-            <div></div>
-            <div></div>
-          </div>
-        </div>
-      </div>
-    );
+    return <Loader status="loading" />;
   }
-  if (status === "rejected") {
+  if (status === "fail") {
     return (
       <div style={{ fontSize: "25px" }}>
         <p role="alert">
           Some error
           <span>{error}</span>
         </p>
-        <button onClick={() => dispatch(setPosts(isMounted))}>
-          Try refetching?
-        </button>
+        <button onClick={() => dispatch(setPosts())}>Try refetching?</button>
       </div>
     );
   }

@@ -109,3 +109,21 @@
   padding: 0;
   justify-content: space-around;
 }
+
+.followers-screen {
+  margin: 100px;
+}
+.followers-screen ul {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  padding: 50px;
+}
+.followers-screen li {
+  display: flex;
+  align-items: baseline;
+  font-size: 1.6rem;
+}
+.followers-screen img {
+  width: 30px;
+}

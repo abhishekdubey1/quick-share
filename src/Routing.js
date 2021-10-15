@@ -17,6 +17,7 @@ import {
   EditDp,
   EditPassword
 } from "./components/Profile/EditProfile";
+import FollowersWrapper from "./components/Profile/FollowersWrapper";
 
 export const Routing = () => {
   const { user } = useSelector(state => state);
@@ -81,20 +82,32 @@ export const Routing = () => {
       <PrivateRoute
         condition={savedUser}
         path="/edit-profile"
-        redirectPath="/"
+        redirectPath="/signin"
         element={<EditProfile />}
       />
       <PrivateRoute
         condition={savedUser}
         path="/edit-dp"
-        redirectPath="/"
+        redirectPath="/signin"
         element={<EditDp />}
       />
       <PrivateRoute
         condition={savedUser}
         path="/edit-password"
-        redirectPath="/"
+        redirectPath="/signin"
         element={<EditPassword />}
+      />
+      <PrivateRoute
+        condition={savedUser}
+        path="/followers/:id"
+        redirectPath="/signin"
+        element={<FollowersWrapper type="followers" />}
+      />
+      <PrivateRoute
+        condition={savedUser}
+        path="/following/:id"
+        redirectPath="/signin"
+        element={<FollowersWrapper type="following" />}
       />
       <Routes path="*">
         <NotFound />

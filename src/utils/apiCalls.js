@@ -5,32 +5,6 @@ const headers = {
     Authorization: "Bearer " + localStorage.getItem("jwt")
   }
 };
-export const likePost = async (id, showError) => {
-  try {
-    const { data } = await axios.put(
-      `${apiEndPoint}/post/like/`,
-      { id },
-      { ...headers }
-    );
-    return data;
-  } catch (error) {
-    showError(`There was some error: ${error.message}`);
-    console.log({ error });
-  }
-};
-export const unlikePost = async (id, showError) => {
-  try {
-    const { data } = await axios.delete(
-      `${apiEndPoint}/like`,
-      { id },
-      { ...headers }
-    );
-    return data;
-  } catch (error) {
-    showError(`There was some error: ${error.message}`);
-    console.log({ error });
-  }
-};
 export const fetchPosts = async () => {
   try {
     const response = await axios(`${apiEndPoint}/allposts`, { ...headers });

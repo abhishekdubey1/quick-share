@@ -42,6 +42,7 @@ const Profile = () => {
           postsCount={postsCount}
           followers={followers}
           following={following}
+          userid={_id}
         />
       </header>
       {status === "accepted" && <PhotoPosts posts={posts || []} />}
@@ -51,7 +52,7 @@ const Profile = () => {
 };
 
 export default Profile;
-const Loader = ({ status }) =>
+export const Loader = ({ status }) =>
   status ? (
     <div className="ht-50 fl-ct">
       <div className="loader">

@@ -14,18 +14,18 @@ const FollowBtn = ({ userid, isFollowed, postsCount, setUser }) => {
           const { unFollowedUser } = await unFollow(userid);
           setUser({
             ...unFollowedUser,
-            postsCount,
-            followersCount: unFollowedUser.followers.length,
-            followingCount: unFollowedUser.following.length
+            postsCount
+            // followersCount: unFollowedUser.followers.length,
+            // followingCount: unFollowedUser.following.length,
           });
           setStatus("accepted");
         } else {
           const { followedUser } = await follow(userid);
           setUser({
             ...followedUser,
-            postsCount,
-            followersCount: followedUser.followers.length,
-            followingCount: followedUser.following.length
+            postsCount
+            // followersCount: followedUser.followers.length,
+            // followingCount: followedUser.following.length
           });
           setStatus("accepted");
         }
