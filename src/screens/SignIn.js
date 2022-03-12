@@ -4,7 +4,7 @@ import { ROUTES, ipClass } from "../utils/helper";
 import { useTitle, useForm } from "../utils/customHooks";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../store/actions/userActions";
-const initialState = { email: "user1@gmail.com", password: "user1234" };
+const initialState = { email: "", password: "" };
 const SignIn = () => {
   const dispatch = useDispatch();
   const { status } = useSelector(state => state.loader.signinLoader);
