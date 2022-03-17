@@ -49,7 +49,14 @@ function Post({ post, isOwnPost, isLiked }) {
           {isOwnPost && <DeleteBtn onClick={deletePost} />}
         </div>
       </div>
-      <div className="post-main fl-ct" title="Open in a new tab">
+      <div
+        className="post-main fl-ct"
+        title="Open in a new tab"
+        onDoubleClick={() => {
+          console.log("like");
+          handleLike("like");
+        }}
+      >
         <img src={photo} alt="Post" className="post-img" loading="lazy" />
       </div>
       <div className="post-features">
