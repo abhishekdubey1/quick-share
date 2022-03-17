@@ -28,7 +28,7 @@ export default function postsReducer(state = INITIAL_STATE, { type, payload }) {
     case LIKE_POST: {
       const idx = state.findIndex(post => post._id === payload.post._id);
       return produce(state, draft => {
-        draft[idx] = payload.post;
+        draft[idx].likes = payload.post.likes;
       });
     }
     // case ADD_COMMENT: {
