@@ -1,13 +1,15 @@
 import axios from "axios";
 import { apiEndPoint } from "./helper";
-const headers = {
+
+const getJwt = () => localStorage.getItem("jwt")
+const headers = () => ({
   headers: {
-    Authorization: "Bearer " + localStorage.getItem("jwt")
+    Authorization: "Bearer " + getJwt()
   }
-};
+});
 export const fetchPosts = async () => {
   try {
-    const response = await axios(`${apiEndPoint}/allposts`, { ...headers });
+    const response = await axios(`${apiEndPoint}/allposts`, { ...headers() });
     return response;
   } catch (error) {
     alert(`There was some error: ${error.message}`);
@@ -21,7 +23,7 @@ export const makeComment = async (text, postId) => {
     const { data } = await axios.post(
       `${apiEndPoint}/comment/${postId}`,
       { text },
-      { ...headers }
+      { ...headers() }
     );
     return data.comments;
   } catch (error) {
@@ -34,7 +36,7 @@ export const removeComment = async (commentId, postId) => {
   try {
     const url = `${apiEndPoint}/comment/${postId}/${commentId}`;
     const { data } = await axios.delete(url, {
-      ...headers
+      ...headers()
     });
     return data.comments;
   } catch (error) {
@@ -46,7 +48,7 @@ export const removeComment = async (commentId, postId) => {
 export const deletePost = async postid => {
   try {
     const { data } = await axios.delete(`/deletepost/${postid}`, {
-      ...headers
+      ...headers()
     });
     console.log({ data });
     //   const newData = data.filter((item) => {
@@ -62,7 +64,7 @@ export const deletePost = async postid => {
 export const fetchSubPosts = async () => {
   try {
     const response = await axios(`${apiEndPoint}/getsubpost`, {
-      ...headers
+      ...headers()
     });
     return response;
   } catch (error) {
@@ -77,7 +79,7 @@ export const follow = async followId => {
       `${apiEndPoint}/user/${followId}/follow`,
       {},
       {
-        ...headers
+        ...headers()
       }
     );
     return data;
@@ -92,7 +94,7 @@ export const unFollow = async unfollowId => {
   try {
     const { data } = await axios.delete(
       `${apiEndPoint}/user/${unfollowId}/follow`,
-      { ...headers }
+      { ...headers() }
     );
     return data;
     // setData(newData);
@@ -104,7 +106,7 @@ export const unFollow = async unfollowId => {
 };
 export const fetchUser = async (id, setUser, setPosts) => {
   try {
-    const result = await axios(`${apiEndPoint}/user/${id}`, { ...headers });
+    const result = await axios(`${apiEndPoint}/user/${id}`, { ...headers() });
     setUser(result.data.user);
     setPosts(result.data.posts);
     return result;
@@ -117,7 +119,7 @@ export const fetchUser = async (id, setUser, setPosts) => {
 
 export const fetchUserPosts = async id => {
   try {
-    const { data } = await axios(`${apiEndPoint}/user/${id}`, { ...headers });
+    const { data } = await axios(`${apiEndPoint}/user/${id}`, { ...headers() });
     return data;
   } catch (error) {
     console.log(error);
@@ -145,7 +147,7 @@ export const createPost = async (caption, photo) => {
         caption,
         photo
       },
-      { ...headers }
+      { ...headers() }
     );
     return data;
   } catch (error) {
