@@ -5,10 +5,10 @@ import { useTitle, useForm, useImage } from "../utils/customHooks";
 import { useDispatch, useSelector } from "react-redux";
 import { signup } from "../store/actions/userActions";
 const initialState = {
-  name: "chan",
-  email: "chan@gmail.com",
-  password: "chan123",
-  confirmPassword: "chan123"
+  name: "",
+  email: "",
+  password: "",
+  confirmPassword: ""
 };
 
 const SignUp = () => {
@@ -23,24 +23,7 @@ const SignUp = () => {
       dispatch(signup({ ...values, dpUrl }));
     }
   }
-  // async function uploadPic() {
-  //   if (image) {
-  //     const data = new FormData();
-  //     data.append("file", image);
-  //     data.append("upload_preset", "hook-up");
-  //     data.append("cloud_name", "hookupcloudddddddddddd");
-  //     console.log("request to cloud");
-  //     const res = await fetch(hookupcloudUrl, {
-  //       method: "post",
-  //       body: data
-  //     });
-  //     const resData = await res.json();
-  //     console.log("res from cloud", { url: resData.url });
-  //     submitForm(resData.url);
-  //   } else {
-  //     submitForm();
-  //   }
-  // }
+
   return (
     <div className="signup-container">
       <br />
