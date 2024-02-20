@@ -10,7 +10,7 @@ export const ROUTES = {
   TOKEN: "reset/:token"
 };
 export const prefix = "https://cors-anywhere.herokuapp.com/";
-export const apiEndPoint = "https://quick-share-api.ad99526.repl.co/api/v1";
+export const apiEndPoint = "https://replit.com/@ad99526/quick-share-api/api/v1";
 //
 // "http://localhost:5000";
 export const hookupcloudUrl =
